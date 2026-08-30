@@ -1,0 +1,218 @@
+<title>Felipi Sousa</title>
+<style>
+  :root{
+    --paper: #f0f1ee;
+    --paper-raised: #ffffff;
+    --ink: #16160f;
+    --ink-soft: #55564d;
+    --ink-faint: #8a8b80;
+    --line: #d3d4cc;
+    --tag-bg-hover: #16160f;
+    --tag-fg-hover: #f0f1ee;
+    --focus-ring: #16160f;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper: #131310;
+      --paper-raised: #1b1b17;
+      --ink: #eeeee6;
+      --ink-soft: #a8a99c;
+      --ink-faint: #75766b;
+      --line: #33342c;
+      --tag-bg-hover: #eeeee6;
+      --tag-fg-hover: #131310;
+      --focus-ring: #eeeee6;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper: #131310;
+    --paper-raised: #1b1b17;
+    --ink: #eeeee6;
+    --ink-soft: #a8a99c;
+    --ink-faint: #75766b;
+    --line: #33342c;
+    --tag-bg-hover: #eeeee6;
+    --tag-fg-hover: #131310;
+    --focus-ring: #eeeee6;
+  }
+
+  *{ box-sizing: border-box; }
+
+  body{
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: clamp(2.5rem, 6vw, 6.5rem) 1.5rem 3rem;
+  }
+
+  .sheet{
+    width: 100%;
+    max-width: 39rem;
+  }
+
+  .eyebrow{
+    font-family: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 1.1rem;
+    opacity: 0;
+    animation: rise 0.6s ease-out 0.05s forwards;
+  }
+
+  h1{
+    font-family: "Newsreader", ui-serif, Georgia, "Times New Roman", serif;
+    font-weight: 500;
+    font-size: clamp(2.1rem, 5.4vw, 3.15rem);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.85rem;
+    text-wrap: balance;
+    opacity: 0;
+    animation: rise 0.6s ease-out 0.15s forwards;
+  }
+
+  .tagline{
+    font-family: "Newsreader", ui-serif, Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(1.05rem, 2.3vw, 1.28rem);
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 34rem;
+    margin: 0 0 2.1rem;
+    text-wrap: balance;
+    opacity: 0;
+    animation: rise 0.6s ease-out 0.25s forwards;
+  }
+
+  .rule{
+    border: none;
+    border-top: 1px solid var(--line);
+    margin: 0 0 1.9rem;
+    opacity: 0;
+    animation: rise 0.6s ease-out 0.32s forwards;
+  }
+
+  .links{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin: 0 0 2.4rem;
+    padding: 0;
+    list-style: none;
+    opacity: 0;
+    animation: rise 0.6s ease-out 0.4s forwards;
+  }
+
+  .links a{
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 0.86rem;
+    font-weight: 500;
+    color: var(--ink);
+    text-decoration: none;
+    border: 1px solid var(--ink);
+    border-radius: 2px;
+    padding: 0.5rem 0.9rem;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+
+  .links a:hover,
+  .links a:focus-visible{
+    background: var(--tag-bg-hover);
+    color: var(--tag-fg-hover);
+  }
+
+  .links a:focus-visible{
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+  }
+
+  .links a .arrow{
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.82em;
+  }
+
+  .focus-areas{
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    line-height: 1.9;
+    margin: 0 0 3rem;
+    opacity: 0;
+    animation: rise 0.6s ease-out 0.48s forwards;
+  }
+
+  .focus-areas .sep{
+    color: var(--ink-faint);
+    margin: 0 0.55em;
+  }
+
+  footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--line);
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 0.78rem;
+    color: var(--ink-faint);
+    opacity: 0;
+    animation: rise 0.6s ease-out 0.56s forwards;
+  }
+
+  footer .status{
+    font-style: italic;
+    font-family: "Newsreader", serif;
+    font-size: 0.86rem;
+    color: var(--ink-soft);
+  }
+
+  @keyframes rise{
+    from{ opacity: 0; transform: translateY(6px); }
+    to{ opacity: 1; transform: translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .eyebrow, h1, .tagline, .rule, .links, .focus-areas, footer{
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<div class="sheet">
+  <p class="eyebrow">São Carlos, Brasil</p>
+  <h1>Felipi Adenildo Soares Sousa</h1>
+  <p class="tagline">Engenharia de Computação (USP) com foco em IA aplicada &mdash; visão computacional, sistemas embarcados e automação em nuvem.</p>
+
+  <hr class="rule">
+
+  <ul class="links">
+    <li><a href="https://www.linkedin.com/in/felipiadenildo/" target="_blank" rel="noopener">LinkedIn <span class="arrow">&#8599;</span></a></li>
+    <li><a href="https://github.com/felipiadenildo" target="_blank" rel="noopener">GitHub <span class="arrow">&#8599;</span></a></li>
+    <li><a href="mailto:felipiadenildo@gmail.com">Email <span class="arrow">&#8599;</span></a></li>
+  </ul>
+
+  <p class="focus-areas">VISÃO COMPUTACIONAL<span class="sep">&middot;</span>EDGE AI<span class="sep">&middot;</span>CLOUD (AWS)<span class="sep">&middot;</span>SISTEMAS EMBARCADOS</p>
+
+  <footer>
+    <span class="status">Página completa em construção &mdash; em breve.</span>
+    <span>2026</span>
+  </footer>
+</div>
