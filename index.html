@@ -1,218 +1,353 @@
+<!doctype html>
+<html lang="pt-BR" data-lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Felipi Sousa</title>
+<meta name="description" content="Site pessoal de Felipi Adenildo Soares Sousa, engenheiro de computação (USP) atuando em desenvolvimento de software e visão computacional.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
   :root{
-    --paper: #f0f1ee;
-    --paper-raised: #ffffff;
-    --ink: #16160f;
-    --ink-soft: #55564d;
-    --ink-faint: #8a8b80;
-    --line: #d3d4cc;
-    --tag-bg-hover: #16160f;
-    --tag-fg-hover: #f0f1ee;
-    --focus-ring: #16160f;
+    --paper: #f0f1ee; --paper-raised: #ffffff; --ink: #16160f; --ink-soft: #55564d;
+    --ink-faint: #8a8b80; --line: #d3d4cc; --tag-bg-hover: #16160f; --tag-fg-hover: #f0f1ee;
+    --focus-ring: #16160f; --accent: #8a2a1f; color-scheme: light dark;
   }
   @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --paper: #131310;
-      --paper-raised: #1b1b17;
-      --ink: #eeeee6;
-      --ink-soft: #a8a99c;
-      --ink-faint: #75766b;
-      --line: #33342c;
-      --tag-bg-hover: #eeeee6;
-      --tag-fg-hover: #131310;
-      --focus-ring: #eeeee6;
+    :root{
+      --paper: #131310; --paper-raised: #1b1b17; --ink: #eeeee6; --ink-soft: #a8a99c;
+      --ink-faint: #75766b; --line: #33342c; --tag-bg-hover: #eeeee6; --tag-fg-hover: #131310;
+      --focus-ring: #eeeee6; --accent: #d97a68;
     }
   }
-  :root[data-theme="dark"]{
-    --paper: #131310;
-    --paper-raised: #1b1b17;
-    --ink: #eeeee6;
-    --ink-soft: #a8a99c;
-    --ink-faint: #75766b;
-    --line: #33342c;
-    --tag-bg-hover: #eeeee6;
-    --tag-fg-hover: #131310;
-    --focus-ring: #eeeee6;
-  }
-
   *{ box-sizing: border-box; }
-
+  html, body{ margin: 0; padding: 0; }
   body{
-    background: var(--paper);
-    color: var(--ink);
+    background: var(--paper); color: var(--ink);
     font-family: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    padding: clamp(2.5rem, 6vw, 6.5rem) 1.5rem 3rem;
+    -webkit-font-smoothing: antialiased; min-height: 100vh;
   }
+  .wrap{ display: flex; justify-content: center; padding: clamp(2.5rem, 6vw, 6.5rem) 1.5rem 4rem; }
+  .sheet{ width: 100%; max-width: 40rem; }
 
-  .sheet{
-    width: 100%;
-    max-width: 39rem;
+  /* top bar: site nav + language toggle (smart sticky: translucent, hides on scroll down, reappears on scroll up) */
+  .topbar{
+    position: fixed; top: 0; left: 0; right: 0; z-index: 20;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.1rem 1.2rem; pointer-events: none;
+    background: rgba(240,241,238,0.78);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    transition: transform 0.25s ease;
   }
+  @media (prefers-color-scheme: dark){
+    .topbar{ background: rgba(19,19,16,0.78); }
+  }
+  .topbar.nav-hidden{ transform: translateY(-100%); }
+  .topbar > *{ pointer-events: auto; }
+  .sitenav{
+    display: flex; gap: 1.1rem; list-style: none; margin: 0; padding: 0;
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.76rem; letter-spacing: 0.03em;
+  }
+  .sitenav a{ color: var(--ink-soft); text-decoration: none; padding: 0.3rem 0; border-bottom: 1px solid transparent; }
+  .sitenav a:hover{ color: var(--ink); }
+  .sitenav a[aria-current="page"]{ color: var(--ink); border-bottom-color: var(--accent); }
+  .langtoggle{
+    display: flex; border: 1px solid var(--ink); border-radius: 3px; overflow: hidden;
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.72rem; letter-spacing: 0.04em;
+    background: var(--paper-raised);
+  }
+  .langtoggle button{
+    appearance: none; border: none; background: transparent; color: var(--ink-soft);
+    padding: 0.4rem 0.65rem; cursor: pointer; font: inherit; letter-spacing: inherit;
+  }
+  html[data-lang="pt"] .langtoggle button[data-set="pt"],
+  html[data-lang="en"] .langtoggle button[data-set="en"]{ background: var(--ink); color: var(--paper-raised); }
 
   .eyebrow{
     font-family: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    margin: 0 0 1.1rem;
-    opacity: 0;
-    animation: rise 0.6s ease-out 0.05s forwards;
+    font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ink-soft); margin: 2.6rem 0 1.1rem;
   }
-
   h1{
     font-family: "Newsreader", ui-serif, Georgia, "Times New Roman", serif;
-    font-weight: 500;
-    font-size: clamp(2.1rem, 5.4vw, 3.15rem);
-    line-height: 1.08;
-    letter-spacing: -0.01em;
-    margin: 0 0 0.85rem;
-    text-wrap: balance;
-    opacity: 0;
-    animation: rise 0.6s ease-out 0.15s forwards;
+    font-weight: 500; font-size: clamp(2.1rem, 5.4vw, 3.15rem);
+    line-height: 1.08; letter-spacing: -0.01em; margin: 0 0 0.85rem; text-wrap: balance;
   }
-
   .tagline{
     font-family: "Newsreader", ui-serif, Georgia, serif;
-    font-style: italic;
-    font-weight: 400;
-    font-size: clamp(1.05rem, 2.3vw, 1.28rem);
-    line-height: 1.55;
-    color: var(--ink-soft);
-    max-width: 34rem;
-    margin: 0 0 2.1rem;
-    text-wrap: balance;
-    opacity: 0;
-    animation: rise 0.6s ease-out 0.25s forwards;
+    font-style: italic; font-weight: 400; font-size: clamp(1.05rem, 2.3vw, 1.28rem);
+    line-height: 1.55; color: var(--ink-soft); max-width: 34rem; margin: 0 0 2.1rem; text-wrap: balance;
   }
-
-  .rule{
-    border: none;
-    border-top: 1px solid var(--line);
-    margin: 0 0 1.9rem;
-    opacity: 0;
-    animation: rise 0.6s ease-out 0.32s forwards;
-  }
-
-  .links{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.65rem;
-    margin: 0 0 2.4rem;
-    padding: 0;
-    list-style: none;
-    opacity: 0;
-    animation: rise 0.6s ease-out 0.4s forwards;
-  }
-
+  .rule{ border: none; border-top: 1px solid var(--line); margin: 0 0 1.9rem; }
+  .links{ display: flex; flex-wrap: wrap; gap: 0.65rem; margin: 0 0 2.4rem; padding: 0; list-style: none; }
   .links a{
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4em;
-    font-family: "IBM Plex Sans", sans-serif;
-    font-size: 0.86rem;
-    font-weight: 500;
-    color: var(--ink);
-    text-decoration: none;
-    border: 1px solid var(--ink);
-    border-radius: 2px;
-    padding: 0.5rem 0.9rem;
-    transition: background-color 0.15s ease, color 0.15s ease;
+    display: inline-flex; align-items: center; gap: 0.4em;
+    font-family: "IBM Plex Sans", sans-serif; font-size: 0.86rem; font-weight: 500;
+    color: var(--ink); text-decoration: none; border: 1px solid var(--ink);
+    border-radius: 2px; padding: 0.5rem 0.9rem; transition: background-color 0.15s ease, color 0.15s ease;
   }
-
-  .links a:hover,
-  .links a:focus-visible{
-    background: var(--tag-bg-hover);
-    color: var(--tag-fg-hover);
-  }
-
-  .links a:focus-visible{
-    outline: 2px solid var(--focus-ring);
-    outline-offset: 2px;
-  }
-
-  .links a .arrow{
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 0.82em;
-  }
-
+  .links a:hover, .links a:focus-visible{ background: var(--tag-bg-hover); color: var(--tag-fg-hover); }
+  .links a:focus-visible{ outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+  .links a .arrow{ font-family: "IBM Plex Mono", monospace; font-size: 0.82em; }
   .focus-areas{
-    font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: 0.78rem;
-    letter-spacing: 0.04em;
-    color: var(--ink-soft);
-    line-height: 1.9;
-    margin: 0 0 3rem;
-    opacity: 0;
-    animation: rise 0.6s ease-out 0.48s forwards;
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.78rem;
+    letter-spacing: 0.04em; color: var(--ink-soft); line-height: 1.9; margin: 0 0 3rem;
+  }
+  .focus-areas .sep{ color: var(--ink-faint); margin: 0 0.55em; }
+
+  section{ margin: 0 0 3.4rem; }
+  section > h2{
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.72rem;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft);
+    margin: 0 0 1.3rem; padding-top: 1.9rem; border-top: 1px solid var(--line);
+  }
+  .about-grid{ display: grid; grid-template-columns: 8.5rem 1fr; gap: 1.6rem; align-items: start; }
+  .about-grid img{ width: 8.5rem; height: auto; border-radius: 4px; border: 1px solid var(--line); object-fit: cover; }
+  @media (max-width: 30rem){
+    .about-grid{ grid-template-columns: 1fr; }
+    .about-grid img{ width: 6.5rem; }
+  }
+  .prose p{
+    font-family: "Newsreader", ui-serif, Georgia, serif; font-size: 1.05rem;
+    line-height: 1.68; color: var(--ink); margin: 0 0 1.05rem;
+  }
+  .prose p:last-child{ margin-bottom: 0; }
+  .prose .cta{
+    font-family: "IBM Plex Mono", monospace; font-size: 0.78rem; letter-spacing: 0.02em;
+    color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor;
   }
 
-  .focus-areas .sep{
-    color: var(--ink-faint);
-    margin: 0 0.55em;
+  .cards{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
+  @media (max-width: 48rem){ .cards{ grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 34rem){ .cards{ grid-template-columns: 1fr; } }
+  .card{ background: var(--paper-raised); border: 1px solid var(--line); border-radius: 6px; padding: 1.3rem 1.4rem; display: flex; flex-direction: column; }
+  .card h3{ font-family: "Newsreader", ui-serif, Georgia, serif; font-weight: 600; font-size: 1.08rem; margin: 0 0 0.5rem; color: var(--ink); }
+  .card .kicker{ font-family: "IBM Plex Mono", monospace; font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 0.4rem; }
+  .card p:not(.kicker){ font-family: "IBM Plex Sans", sans-serif; font-size: 0.87rem; line-height: 1.58; color: var(--ink-soft); margin: 0 0 0.9rem; flex: 1; }
+  .card a{ font-family: "IBM Plex Mono", monospace; font-size: 0.74rem; letter-spacing: 0.02em; color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; align-self: flex-start; }
+  .card a:hover{ opacity: 0.75; }
+
+  .campus-figure{ margin: 1.6rem 0 0; }
+  .campus-figure img{ width: 100%; height: auto; display: block; border-radius: 6px; border: 1px solid var(--line); filter: saturate(0.82); }
+  .campus-figure figcaption{ font-family: "IBM Plex Mono", monospace; font-size: 0.7rem; color: var(--ink-faint); margin-top: 0.5rem; letter-spacing: 0.02em; }
+
+  .cv-options{ display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 34rem){ .cv-options{ grid-template-columns: 1fr; } }
+  .cv-card{ border: 1px solid var(--ink); border-radius: 6px; padding: 1.2rem 1.3rem; }
+  .cv-card h3{ font-family: "IBM Plex Sans", sans-serif; font-weight: 600; font-size: 0.95rem; margin: 0 0 0.4rem; }
+  .cv-card p{ font-family: "IBM Plex Sans", sans-serif; font-size: 0.83rem; color: var(--ink-soft); line-height: 1.55; margin: 0 0 1rem; }
+  .cv-card a.download{
+    display: inline-flex; align-items: center; gap: 0.4em; font-size: 0.83rem; font-weight: 500;
+    color: var(--paper-raised); background: var(--ink); text-decoration: none;
+    border-radius: 3px; padding: 0.5rem 0.85rem; font-family: "IBM Plex Sans", sans-serif; transition: opacity 0.15s ease;
   }
+  .cv-card a.download:hover{ opacity: 0.82; }
+
+  .notice{
+    display: flex; gap: 0.75rem; align-items: flex-start;
+    background: var(--paper-raised); border: 1px dashed var(--line); border-radius: 6px;
+    padding: 0.95rem 1.1rem; margin: 0 0 2rem;
+  }
+  .notice .dot{ flex: none; width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--accent); margin-top: 0.5rem; }
+  .notice p{ font-family: "IBM Plex Sans", sans-serif; font-size: 0.83rem; line-height: 1.55; color: var(--ink-soft); margin: 0; }
 
   footer{
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 1rem;
-    flex-wrap: wrap;
-    padding-top: 1.6rem;
-    border-top: 1px solid var(--line);
-    font-family: "IBM Plex Sans", sans-serif;
-    font-size: 0.78rem;
-    color: var(--ink-faint);
-    opacity: 0;
-    animation: rise 0.6s ease-out 0.56s forwards;
+    display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+    flex-wrap: wrap; padding-top: 1.6rem; border-top: 1px solid var(--line);
+    font-family: "IBM Plex Sans", sans-serif; font-size: 0.78rem; color: var(--ink-faint);
   }
+  footer .status{ font-style: italic; font-family: "Newsreader", serif; font-size: 0.86rem; color: var(--ink-soft); }
 
-  footer .status{
-    font-style: italic;
-    font-family: "Newsreader", serif;
-    font-size: 0.86rem;
-    color: var(--ink-soft);
-  }
+  [data-lang-el]{ display: none; }
+  html[data-lang="pt"] [data-lang-el="pt"]{ display: revert; }
+  html[data-lang="en"] [data-lang-el="en"]{ display: revert; }
+  html[data-lang="pt"] span[data-lang-el="pt"],
+  html[data-lang="en"] span[data-lang-el="en"]{ display: inline; }
 
-  @keyframes rise{
-    from{ opacity: 0; transform: translateY(6px); }
-    to{ opacity: 1; transform: translateY(0); }
+  .paw-trail{
+    position: fixed; bottom: 2rem; left: -4rem; z-index: 999;
+    font-size: 1.7rem; letter-spacing: 0.6rem; pointer-events: none;
+    animation: paw-walk 3.4s ease-in-out forwards; opacity: 0;
   }
-
-  @media (prefers-reduced-motion: reduce){
-    .eyebrow, h1, .tagline, .rule, .links, .focus-areas, footer{
-      animation: none;
-      opacity: 1;
-      transform: none;
-    }
+  @keyframes paw-walk{
+    0%{ opacity: 0; transform: translateX(0); }
+    8%{ opacity: 1; }
+    88%{ opacity: 1; }
+    100%{ opacity: 0; transform: translateX(112vw); }
   }
+  @media (prefers-reduced-motion: reduce){ .paw-trail{ display: none; } }
 </style>
+</head>
+<body>
+  <div class="topbar">
+    <ul class="sitenav">
+      <li><a href="index.html" aria-current="page"><span data-lang-el="pt">Início</span><span data-lang-el="en">Home</span></a></li>
+      <li><a href="historia.html"><span data-lang-el="pt">Minha História</span><span data-lang-el="en">My Story</span></a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="listas.html"><span data-lang-el="pt">Listas</span><span data-lang-el="en">Lists</span></a></li>
+    </ul>
+    <div class="langtoggle" role="group" aria-label="Idioma / Language">
+      <button type="button" data-set="pt" aria-pressed="true">PT</button>
+      <button type="button" data-set="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <div class="wrap">
+  <div class="sheet">
+    <p class="eyebrow">São Carlos, São Paulo, Brasil</p>
+    <h1>Felipi Adenildo Soares Sousa</h1>
+    <p class="tagline">
+      <span data-lang-el="pt">Sou engenheiro de computação e o primeiro da minha família a terminar uma universidade pública. O caminho até aqui não foi direto, e talvez por isso o trabalho que mais gosto de contar tenha nascido de uma curiosidade antiga, de antes da faculdade: usar tecnologia para cuidar de bichos que ninguém mais está cuidando.</span>
+      <span data-lang-el="en">I'm a computer engineer, the first in my family to finish a public university. The path here wasn't a straight one, and maybe that's why the project I most like to talk about grew out of an old curiosity, from before college: using technology to look after animals that no one else is looking after.</span>
+    </p>
 
-<div class="sheet">
-  <p class="eyebrow">São Carlos, Brasil</p>
-  <h1>Felipi Adenildo Soares Sousa</h1>
-  <p class="tagline">Engenharia de Computação (USP) com foco em IA aplicada &mdash; visão computacional, sistemas embarcados e automação em nuvem.</p>
+    <hr class="rule">
 
-  <hr class="rule">
+    <ul class="links">
+      <li><a href="https://www.linkedin.com/in/felipiadenildo/" target="_blank" rel="noopener">LinkedIn <span class="arrow">&#8599;</span></a></li>
+      <li><a href="https://github.com/felipiadenildo" target="_blank" rel="noopener">GitHub <span class="arrow">&#8599;</span></a></li>
+      <li><a href="https://www.instagram.com/felipiadenildo/" target="_blank" rel="noopener">Instagram <span class="arrow">&#8599;</span></a></li>
+      <li><a href="weixin://dl/chat?felipiadenildo" target="_blank" rel="noopener">WeChat <span class="arrow">&#8599;</span></a></li>
+      <li><a href="mailto:felipiadenildo@gmail.com">Email <span class="arrow">&#8599;</span></a></li>
+    </ul>
 
-  <ul class="links">
-    <li><a href="https://www.linkedin.com/in/felipiadenildo/" target="_blank" rel="noopener">LinkedIn <span class="arrow">&#8599;</span></a></li>
-    <li><a href="https://github.com/felipiadenildo" target="_blank" rel="noopener">GitHub <span class="arrow">&#8599;</span></a></li>
-    <li><a href="mailto:felipiadenildo@gmail.com">Email <span class="arrow">&#8599;</span></a></li>
-  </ul>
+    <p class="focus-areas"><span data-lang-el="pt">ENGENHARIA</span><span data-lang-el="en">ENGINEERING</span><span class="sep">&middot;</span><span data-lang-el="pt">COMPUTAÇÃO</span><span data-lang-el="en">COMPUTING</span><span class="sep">&middot;</span>SOFTWARE<span class="sep">&middot;</span><span data-lang-el="pt">VISÃO COMPUTACIONAL</span><span data-lang-el="en">COMPUTER VISION</span><span class="sep">&middot;</span><span data-lang-el="pt">AUTOMAÇÃO</span><span data-lang-el="en">AUTOMATION</span></p>
 
-  <p class="focus-areas">VISÃO COMPUTACIONAL<span class="sep">&middot;</span>EDGE AI<span class="sep">&middot;</span>CLOUD (AWS)<span class="sep">&middot;</span>SISTEMAS EMBARCADOS</p>
+    <section aria-labelledby="sobre-h">
+      <h2 id="sobre-h"><span data-lang-el="pt">Sobre</span><span data-lang-el="en">About</span></h2>
+      <div class="about-grid">
+        <img src="assets/retrato.jpg" alt="Foto de Felipi Adenildo Soares Sousa" loading="lazy">
+        <div class="prose">
+          <div data-lang-el="pt">
+            <p>Sou formado em Engenharia de Computação pela USP São Carlos, o primeiro da minha família a concluir uma universidade pública. Cheguei até aqui depois de passar por Teresina, Fortaleza e Belém em busca do curso certo; hoje trabalho com desenvolvimento de software, automatizando processos e integrando sistemas para bancos e empresas de tecnologia.</p>
+            <p>No trabalho de conclusão de curso, voltei a um interesse antigo, que vem da infância na roça dos meus avós: usar visão computacional para ajudar a identificar, individualmente, os gatos de uma colônia comunitária no campus, algo que antes só dava pra fazer olhando de perto, um por um. É o projeto de que mais me orgulho até hoje.</p>
+            <p>Também dediquei parte da graduação à representação estudantil, com 14 mandatos em colegiados universitários entre 2019 e 2023, e sigo envolvido como voluntário num projeto de extensão dedicado ao bem-estar animal. Os dois estão detalhados na seção de destaques, logo abaixo.</p>
+            <p><a class="cta" href="historia.html">A versão completa dessa trajetória, ainda sendo escrita &#8594;</a></p>
+          </div>
+          <div data-lang-el="en">
+            <p>I'm a Computer Engineer from the University of São Paulo, the first in my family to graduate from a public university. I got here after passing through Teresina, Fortaleza, and Belém looking for the right program; today I work in software development, automating processes and integrating systems for banks and tech companies.</p>
+            <p>For my undergraduate thesis, I returned to an old interest that started in childhood, on my grandparents' land: using computer vision to help identify, individually, the cats in a community colony on campus, something that used to only be possible by looking closely, one by one. It's the project I'm proudest of to this day.</p>
+            <p>I also spent part of my degree on student representation, with 14 terms across university committees between 2019 and 2023, and I'm still involved as a volunteer with an animal-welfare extension project. Both are detailed in the highlights section below.</p>
+            <p><a class="cta" href="historia.html">The full story, still being written &#8594;</a></p>
+          </div>
+        </div>
+      </div>
+      <figure class="campus-figure">
+        <img src="assets/eesc-portal.jpg" alt="Portal vermelho na Escola de Engenharia de São Carlos (EESC), USP" loading="lazy">
+        <figcaption>
+          <span data-lang-el="pt">Portal da EESC, USP São Carlos</span>
+          <span data-lang-el="en">EESC gateway, USP São Carlos campus</span>
+        </figcaption>
+      </figure>
+    </section>
 
-  <footer>
-    <span class="status">Página completa em construção &mdash; em breve.</span>
-    <span>2026</span>
-  </footer>
-</div>
+    <section aria-labelledby="destaques-h">
+      <h2 id="destaques-h"><span data-lang-el="pt">Destaques</span><span data-lang-el="en">Highlights</span></h2>
+      <div class="cards">
+        <div class="card">
+          <p class="kicker"><span data-lang-el="pt">Projeto</span><span data-lang-el="en">Project</span></p>
+          <h3>felinet</h3>
+          <div data-lang-el="pt"><p>Pipeline de visão computacional em 4 fases para reidentificação individual de gatos comunitários: 97,3% de acurácia na detecção, 72,0% Top-1 na reidentificação. É o código por trás do meu TCC.</p></div>
+          <div data-lang-el="en"><p>A 4-stage computer vision pipeline for individual re-identification of community cats: 97.3% detection accuracy, 72.0% Top-1 re-identification accuracy. This is the code behind my undergraduate thesis.</p></div>
+          <a href="https://github.com/felipiadenildo/felinet" target="_blank" rel="noopener"><span data-lang-el="pt">Ver repositório</span><span data-lang-el="en">View repository</span> &#8599;</a>
+        </div>
+        <div class="card">
+          <p class="kicker"><span data-lang-el="pt">Projeto</span><span data-lang-el="en">Project</span></p>
+          <h3>CatalIza-gcms</h3>
+          <div data-lang-el="pt"><p>Ferramenta para facilitar o cálculo de dados de amostras de GCMS (cromatografia gasosa acoplada à espectrometria de massa).</p></div>
+          <div data-lang-el="en"><p>A tool that simplifies calculations for GCMS sample data (gas chromatography&ndash;mass spectrometry).</p></div>
+          <a href="https://github.com/felipiadenildo/CatalIza-gcms" target="_blank" rel="noopener"><span data-lang-el="pt">Ver repositório</span><span data-lang-el="en">View repository</span> &#8599;</a>
+        </div>
+        <div class="card">
+          <p class="kicker"><span data-lang-el="pt">Voluntariado</span><span data-lang-el="en">Volunteering</span></p>
+          <h3>Gatos do C2</h3>
+          <div data-lang-el="pt"><p>Membro fundador do projeto de extensão da USP São Carlos dedicado ao bem-estar e controle populacional ético (método CED) da colônia de gatos do campus.</p></div>
+          <div data-lang-el="en"><p>Founding member of the USP São Carlos extension project focused on the welfare and ethical population control (TNR method) of the campus's cat colony.</p></div>
+          <a href="https://www.instagram.com/gatosdoc2/" target="_blank" rel="noopener">@gatosdoc2 &#8599;</a>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="cv-h">
+      <h2 id="cv-h"><span data-lang-el="pt">Currículo</span><span data-lang-el="en">Résumé</span></h2>
+      <div class="cv-options">
+        <div class="cv-card">
+          <h3><span data-lang-el="pt">Completo</span><span data-lang-el="en">Complete</span></h3>
+          <div data-lang-el="pt"><p>Inclui a experiência com monitoria e aulas particulares, mostrando uma base ampla em exatas, lógica e ensino.</p></div>
+          <div data-lang-el="en"><p>Includes tutoring and teaching experience, showing a broader foundation in STEM, logic, and teaching.</p></div>
+          <a class="download" data-pdf-pt="cv/felipi-sousa-cv-pt.pdf" data-pdf-en="cv/felipi-sousa-cv-en.pdf" href="cv/felipi-sousa-cv-pt.pdf" download>
+            <span data-lang-el="pt">Baixar PDF</span><span data-lang-el="en">Download PDF</span> &#8595;
+          </a>
+        </div>
+        <div class="cv-card">
+          <h3><span data-lang-el="pt">Foco em TI</span><span data-lang-el="en">Tech-focused</span></h3>
+          <div data-lang-el="pt"><p>Versão mais direta, sem a seção de monitoria, pensada para vagas puramente de desenvolvimento/TI sênior.</p></div>
+          <div data-lang-el="en"><p>A leaner version without the tutoring section, geared toward purely senior software/IT roles.</p></div>
+          <a class="download" data-pdf-pt="cv/felipi-sousa-cv-pt-tech.pdf" data-pdf-en="cv/felipi-sousa-cv-en-tech.pdf" href="cv/felipi-sousa-cv-pt-tech.pdf" download>
+            <span data-lang-el="pt">Baixar PDF</span><span data-lang-el="en">Download PDF</span> &#8595;
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="notice">
+      <span class="dot" aria-hidden="true"></span>
+      <p>
+        <span data-lang-el="pt">Este site está no começo: texto, projetos e páginas novas (como "Minha História" e "Listas") ainda estão sendo escritos e vão crescer aos poucos.</span>
+        <span data-lang-el="en">This site is just getting started. Text, projects, and new pages (like "My Story" and "Lists") are still being written and will keep growing over time.</span>
+      </p>
+    </div>
+
+    <footer>
+      <span class="status"><span data-lang-el="pt">Obrigado pela visita.</span><span data-lang-el="en">Thanks for stopping by.</span></span>
+      <span>2026</span>
+    </footer>
+  </div>
+  </div>
+
+<script>
+(function(){
+  var root = document.documentElement;
+  var STORAGE_KEY = 'felipi-site-lang';
+  function applyLang(lang){
+    root.setAttribute('data-lang', lang);
+    root.setAttribute('lang', lang === 'en' ? 'en' : 'pt-BR');
+    document.querySelectorAll('.langtoggle button').forEach(function(btn){
+      btn.setAttribute('aria-pressed', btn.getAttribute('data-set') === lang ? 'true' : 'false');
+    });
+    document.querySelectorAll('[data-pdf-pt]').forEach(function(a){
+      var href = lang === 'en' ? a.getAttribute('data-pdf-en') : a.getAttribute('data-pdf-pt');
+      a.setAttribute('href', href);
+    });
+    try{ localStorage.setItem(STORAGE_KEY, lang); }catch(e){}
+  }
+  document.querySelectorAll('.langtoggle button').forEach(function(btn){
+    btn.addEventListener('click', function(){ applyLang(btn.getAttribute('data-set')); });
+  });
+  var saved = null;
+  try{ saved = localStorage.getItem(STORAGE_KEY); }catch(e){}
+  applyLang(saved === 'en' ? 'en' : 'pt');
+})();
+</script>
+<script src="content/easter-egg.js"></script>
+<script>
+// Smart sticky nav: hides on scroll down, reappears on scroll up.
+(function(){
+  var topbar = document.querySelector('.topbar');
+  if(!topbar) return;
+  var lastY = window.scrollY;
+  var ticking = false;
+  function onScroll(){
+    var y = window.scrollY;
+    if(y > lastY && y > 80){ topbar.classList.add('nav-hidden'); }
+    else{ topbar.classList.remove('nav-hidden'); }
+    lastY = y;
+    ticking = false;
+  }
+  window.addEventListener('scroll', function(){
+    if(!ticking){ window.requestAnimationFrame(onScroll); ticking = true; }
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>

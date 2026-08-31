@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="pt-BR" data-lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Felipi Sousa — Listas</title>
+<meta name="description" content="Listas pessoais de Felipi Adenildo Soares Sousa: filmes, séries, livros, animes, mangás, música, jogos, lugares e mais. Começando aos poucos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --paper: #f0f1ee; --paper-raised: #ffffff; --ink: #16160f; --ink-soft: #55564d;
+    --ink-faint: #8a8b80; --line: #d3d4cc; --focus-ring: #16160f; --accent: #8a2a1f;
+    color-scheme: light dark;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper: #131310; --paper-raised: #1b1b17; --ink: #eeeee6; --ink-soft: #a8a99c;
+      --ink-faint: #75766b; --line: #33342c; --focus-ring: #eeeee6; --accent: #d97a68;
+    }
+  }
+  *{ box-sizing: border-box; }
+  html, body{ margin: 0; padding: 0; }
+  body{
+    background: var(--paper); color: var(--ink);
+    font-family: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased; min-height: 100vh;
+  }
+  .wrap{ display: flex; justify-content: center; padding: clamp(2.5rem, 6vw, 6.5rem) 1.5rem 5rem; }
+  .sheet{ width: 100%; max-width: 40rem; }
+
+  .topbar{
+    position: fixed; top: 0; left: 0; right: 0; z-index: 20;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.1rem 1.2rem; pointer-events: none;
+    background: rgba(240,241,238,0.78);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    transition: transform 0.25s ease;
+  }
+  @media (prefers-color-scheme: dark){ .topbar{ background: rgba(19,19,16,0.78); } }
+  .topbar.nav-hidden{ transform: translateY(-100%); }
+  .topbar > *{ pointer-events: auto; }
+  .sitenav{ display: flex; gap: 1.1rem; list-style: none; margin: 0; padding: 0; font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.76rem; letter-spacing: 0.03em; }
+  .sitenav a{ color: var(--ink-soft); text-decoration: none; padding: 0.3rem 0; border-bottom: 1px solid transparent; }
+  .sitenav a:hover{ color: var(--ink); }
+  .sitenav a[aria-current="page"]{ color: var(--ink); border-bottom-color: var(--accent); }
+  .langtoggle{
+    display: flex; border: 1px solid var(--ink); border-radius: 3px; overflow: hidden;
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.72rem; letter-spacing: 0.04em;
+    background: var(--paper-raised);
+  }
+  .langtoggle button{ appearance: none; border: none; background: transparent; color: var(--ink-soft); padding: 0.4rem 0.65rem; cursor: pointer; font: inherit; letter-spacing: inherit; }
+  html[data-lang="pt"] .langtoggle button[data-set="pt"],
+  html[data-lang="en"] .langtoggle button[data-set="en"]{ background: var(--ink); color: var(--paper-raised); }
+
+  .eyebrow{
+    font-family: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ink-soft); margin: 2.6rem 0 1.1rem;
+  }
+  h1{
+    font-family: "Newsreader", ui-serif, Georgia, "Times New Roman", serif;
+    font-weight: 500; font-size: clamp(2rem, 5vw, 2.9rem);
+    line-height: 1.1; letter-spacing: -0.01em; margin: 0 0 1rem; text-wrap: balance;
+  }
+  .intro{
+    font-family: "Newsreader", ui-serif, Georgia, serif; font-style: italic; font-size: 1.05rem;
+    line-height: 1.6; color: var(--ink-soft); max-width: 34rem; margin: 0 0 2.4rem;
+  }
+  .rule{ border: none; border-top: 1px solid var(--line); margin: 0 0 2.4rem; }
+
+  .category{ margin: 0 0 2.6rem; }
+  .category h2{
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.72rem;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft);
+    margin: 0 0 1rem;
+  }
+  .item{
+    display: flex; align-items: baseline; gap: 0.7rem;
+    background: var(--paper-raised); border: 1px solid var(--line); border-radius: 6px;
+    padding: 0.9rem 1.1rem; margin: 0 0 0.7rem;
+  }
+  .item .bullet{ flex: none; width: 0.4rem; height: 0.4rem; border-radius: 50%; background: var(--accent); }
+  .item p{ font-family: "Newsreader", ui-serif, Georgia, serif; font-size: 1rem; color: var(--ink); margin: 0; }
+
+  .more{
+    display: flex; gap: 0.7rem; align-items: flex-start;
+    border: 1px dashed var(--line); border-radius: 6px; padding: 0.8rem 1rem;
+  }
+  .more .dot{ flex: none; width: 0.45rem; height: 0.45rem; border-radius: 50%; background: var(--ink-faint); margin-top: 0.45rem; }
+  .more p{ margin: 0; font-family: "IBM Plex Sans", sans-serif; font-size: 0.79rem; line-height: 1.55; color: var(--ink-faint); font-style: italic; }
+
+  footer{
+    display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+    flex-wrap: wrap; padding-top: 1.6rem; margin-top: 1rem; border-top: 1px solid var(--line);
+    font-family: "IBM Plex Sans", sans-serif; font-size: 0.78rem; color: var(--ink-faint);
+  }
+
+  [data-lang-el]{ display: none; }
+  html[data-lang="pt"] [data-lang-el="pt"]{ display: revert; }
+  html[data-lang="en"] [data-lang-el="en"]{ display: revert; }
+  html[data-lang="pt"] span[data-lang-el="pt"],
+  html[data-lang="en"] span[data-lang-el="en"]{ display: inline; }
+
+  .paw-trail{
+    position: fixed; bottom: 2rem; left: -4rem; z-index: 999;
+    font-size: 1.7rem; letter-spacing: 0.6rem; pointer-events: none;
+    animation: paw-walk 3.4s ease-in-out forwards; opacity: 0;
+  }
+  @keyframes paw-walk{
+    0%{ opacity: 0; transform: translateX(0); }
+    8%{ opacity: 1; }
+    88%{ opacity: 1; }
+    100%{ opacity: 0; transform: translateX(112vw); }
+  }
+  @media (prefers-reduced-motion: reduce){ .paw-trail{ display: none; } }
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <ul class="sitenav">
+      <li><a href="index.html"><span data-lang-el="pt">Início</span><span data-lang-el="en">Home</span></a></li>
+      <li><a href="historia.html"><span data-lang-el="pt">Minha História</span><span data-lang-el="en">My Story</span></a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="listas.html" aria-current="page"><span data-lang-el="pt">Listas</span><span data-lang-el="en">Lists</span></a></li>
+    </ul>
+    <div class="langtoggle" role="group" aria-label="Idioma / Language">
+      <button type="button" data-set="pt" aria-pressed="true">PT</button>
+      <button type="button" data-set="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+
+  <div class="wrap">
+  <div class="sheet">
+    <p class="eyebrow"><span data-lang-el="pt">Um começo</span><span data-lang-el="en">A beginning</span></p>
+    <h1>Listas</h1>
+    <p class="intro">
+      <span data-lang-el="pt">Um registro pessoal simples do que assisto, leio e jogo, tipo um Letterboxd caseiro. Cada categoria começa com um item; o resto eu vou completando aos poucos.</span>
+      <span data-lang-el="en">A simple personal record of what I watch, read, and play, like a homemade Letterboxd. Each category starts with one item; I'll fill in the rest over time.</span>
+    </p>
+    <hr class="rule">
+
+    <div class="category">
+      <h2><span data-lang-el="pt">Filmes</span><span data-lang-el="en">Movies</span></h2>
+      <div class="item"><span class="bullet" aria-hidden="true"></span><p>Os Sete Samurais / Harakiri</p></div>
+      <div class="more"><span class="dot" aria-hidden="true"></span><p><span data-lang-el="pt">Lista começando. Mais filmes em breve.</span><span data-lang-el="en">Just getting started, more movies soon.</span></p></div>
+    </div>
+
+    <div class="category">
+      <h2><span data-lang-el="pt">Séries</span><span data-lang-el="en">TV Series</span></h2>
+      <div class="item"><span class="bullet" aria-hidden="true"></span><p>Fallout</p></div>
+      <div class="more"><span class="dot" aria-hidden="true"></span><p><span data-lang-el="pt">Lista começando. Mais séries em breve.</span><span data-lang-el="en">Just getting started, more series soon.</span></p></div>
+    </div>
+
+    <div class="category">
+      <h2><span data-lang-el="pt">Livros</span><span data-lang-el="en">Books</span></h2>
+      <div class="item"><span class="bullet" aria-hidden="true"></span><p>1984 <span style="opacity:.6">(<span data-lang-el="pt">ou Percy Jackson? me diga qual prefere aqui primeiro</span><span data-lang-el="en">or Percy Jackson? tell me which one you want first</span>)</span></p></div>
+      <div class="more"><span class="dot" aria-hidden="true"></span><p><span data-lang-el="pt">Lista começando. Mais livros em breve.</span><span data-lang-el="en">Just getting started, more books soon.</span></p></div>
+    </div>
+
+    <div class="category">
+      <h2><span data-lang-el="pt">Animes</span><span data-lang-el="en">Anime</span></h2>
+      <div class="item"><span class="bullet" aria-hidden="true"></span><p>Neon Genesis Evangelion</p></div>
+      <div class="more"><span class="dot" aria-hidden="true"></span><p><span data-lang-el="pt">Lista começando. Mais animes em breve.</span><span data-lang-el="en">Just getting started, more anime soon.</span></p></div>
+    </div>
+
+    <div class="category">
+      <h2><span data-lang-el="pt">Mangás</span><span data-lang-el="en">Manga</span></h2>
+      <div class="item"><span class="bullet" aria-hidden="true"></span><p>Fullmetal Alchemist</p></div>
+      <div class="more"><span class="dot" aria-hidden="true"></span><p><span data-lang-el="pt">Lista começando. Mais mangás em breve.</span><span data-lang-el="en">Just getting started, more manga soon.</span></p></div>
+    </div>
+
+    <div class="category">
+      <h2><span data-lang-el="pt">Música</span><span data-lang-el="en">Music</span></h2>
+      <div class="more"><span class="dot" aria-hidden="true"></span><p><span data-lang-el="pt">Ainda não comecei essa lista.</span><span data-lang-el="en">Haven't started this list yet.</span></p></div>
+    </div>
+
+    <div class="category">
+      <h2><span data-lang-el="pt">Jogos</span><span data-lang-el="en">Games</span></h2>
+      <div class="item"><span class="bullet" aria-hidden="true"></span><p>Pokémon</p></div>
+      <div class="more"><span class="dot" aria-hidden="true"></span><p><span data-lang-el="pt">Lista começando. Mais jogos em breve.</span><span data-lang-el="en">Just getting started, more games soon.</span></p></div>
+    </div>
+
+    <div class="category">
+      <h2><span data-lang-el="pt">Lugares</span><span data-lang-el="en">Places</span></h2>
+      <div class="more"><span class="dot" aria-hidden="true"></span><p><span data-lang-el="pt">Ainda não comecei essa lista.</span><span data-lang-el="en">Haven't started this list yet.</span></p></div>
+    </div>
+
+    <div class="category">
+      <h2><span data-lang-el="pt">Amigos</span><span data-lang-el="en">Friends</span></h2>
+      <div class="more"><span class="dot" aria-hidden="true"></span><p><span data-lang-el="pt">Ainda não comecei essa lista.</span><span data-lang-el="en">Haven't started this list yet.</span></p></div>
+    </div>
+
+    <div class="category">
+      <h2><span data-lang-el="pt">Outros</span><span data-lang-el="en">Other</span></h2>
+      <div class="more"><span class="dot" aria-hidden="true"></span><p><span data-lang-el="pt">Espaço reservado pra o que não couber nas categorias acima.</span><span data-lang-el="en">Reserved space for anything that doesn't fit the categories above.</span></p></div>
+    </div>
+
+    <footer>
+      <a href="index.html" style="color:var(--ink-faint);text-decoration:none;">&#8592; <span data-lang-el="pt">voltar ao início</span><span data-lang-el="en">back to home</span></a>
+      <span>2026</span>
+    </footer>
+  </div>
+  </div>
+
+<script src="content/easter-egg.js"></script>
+<script>
+(function(){
+  var root = document.documentElement;
+  var STORAGE_KEY = 'felipi-site-lang';
+  function applyLang(lang){
+    root.setAttribute('data-lang', lang);
+    root.setAttribute('lang', lang === 'en' ? 'en' : 'pt-BR');
+    document.querySelectorAll('.langtoggle button').forEach(function(btn){
+      btn.setAttribute('aria-pressed', btn.getAttribute('data-set') === lang ? 'true' : 'false');
+    });
+    try{ localStorage.setItem(STORAGE_KEY, lang); }catch(e){}
+  }
+  document.querySelectorAll('.langtoggle button').forEach(function(btn){
+    btn.addEventListener('click', function(){ applyLang(btn.getAttribute('data-set')); });
+  });
+  var saved = null;
+  try{ saved = localStorage.getItem(STORAGE_KEY); }catch(e){}
+  applyLang(saved === 'en' ? 'en' : 'pt');
+})();
+
+// Smart sticky nav: hides on scroll down, reappears on scroll up.
+(function(){
+  var topbar = document.querySelector('.topbar');
+  if(!topbar) return;
+  var lastY = window.scrollY;
+  var ticking = false;
+  function onScroll(){
+    var y = window.scrollY;
+    if(y > lastY && y > 80){ topbar.classList.add('nav-hidden'); }
+    else{ topbar.classList.remove('nav-hidden'); }
+    lastY = y;
+    ticking = false;
+  }
+  window.addEventListener('scroll', function(){
+    if(!ticking){ window.requestAnimationFrame(onScroll); ticking = true; }
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>
