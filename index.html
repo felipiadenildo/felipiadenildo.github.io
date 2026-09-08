@@ -1,56 +1,100 @@
 <!doctype html>
-<html lang="pt-BR" data-lang="pt">
+<html lang="en" data-lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Felipi Sousa</title>
-<meta name="description" content="Site pessoal de Felipi Adenildo Soares Sousa, engenheiro de computação (USP) atuando em desenvolvimento de software e visão computacional.">
+<meta name="description" content="Felipi Sousa, Computer Engineer (USP). Software development, process automation, and computer vision. Résumé, experience, and cover letter, all on one page.">
+<link rel="canonical" href="https://felipiadenildo.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Felipi Sousa">
+<meta property="og:description" content="Computer Engineer (USP). Software development, process automation, and computer vision.">
+<meta property="og:url" content="https://felipiadenildo.github.io/">
+<meta property="og:image" content="https://felipiadenildo.github.io/assets/retrato.jpg">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>%F0%9F%90%BE</text></svg>">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Felipi Adenildo Soares Sousa",
+  "url": "https://felipiadenildo.github.io/",
+  "image": "https://felipiadenildo.github.io/assets/retrato.jpg",
+  "jobTitle": "Computer Engineer",
+  "email": "mailto:felipiadenildo@gmail.com",
+  "alumniOf": { "@type": "CollegeOrUniversity", "name": "Universidade de São Paulo" },
+  "sameAs": [
+    "https://www.linkedin.com/in/felipiadenildo/",
+    "https://github.com/felipiadenildo",
+    "https://www.instagram.com/felipiadenildo/"
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;700&display=swap">
 <style>
   :root{
-    --paper: #f0f1ee; --paper-raised: #ffffff; --ink: #16160f; --ink-soft: #55564d;
-    --ink-faint: #8a8b80; --line: #d3d4cc; --tag-bg-hover: #16160f; --tag-fg-hover: #f0f1ee;
-    --focus-ring: #16160f; --accent: #8a2a1f; color-scheme: light dark;
+    /* Light palette reworked 08/09/2026 — warmer "paper" tone instead of a clinical
+       cool off-white, inspired by site-izadora's approach (warm canvas, semantic
+       tokens, contrast-checked pairs) without copying its exact hues — accent stays
+       the arch red extracted from the EESC banner photo, since that's tied to this
+       site specifically. Previous values: --paper #f0f1ee, --ink #16160f,
+       --ink-soft #55564d, --ink-faint #8a8b80, --line #d3d4cc. */
+    --paper: #f6f2ea; --paper-raised: #fffdf8; --ink: #211e17; --ink-soft: #5c5749;
+    --ink-faint: #8f8873; --line: #ddd3bd; --tag-bg-hover: #211e17; --tag-fg-hover: #f6f2ea;
+    --focus-ring: #211e17;
+    --accent: #a8321f;
+    --topbar-bg: rgba(246,242,234,0.78);
+    color-scheme: light dark;
   }
   @media (prefers-color-scheme: dark){
-    :root{
+    :root:not([data-theme="light"]){
       --paper: #131310; --paper-raised: #1b1b17; --ink: #eeeee6; --ink-soft: #a8a99c;
       --ink-faint: #75766b; --line: #33342c; --tag-bg-hover: #eeeee6; --tag-fg-hover: #131310;
-      --focus-ring: #eeeee6; --accent: #d97a68;
+      --focus-ring: #eeeee6;
+      /* EXPERIMENTAL — was #d97a68, see note above. */
+      --accent: #e08a6e;
+      --topbar-bg: rgba(19,19,16,0.78);
     }
   }
+  /* manual override via the sun/moon toggle wins in both directions */
+  :root[data-theme="dark"]{
+    --paper: #131310; --paper-raised: #1b1b17; --ink: #eeeee6; --ink-soft: #a8a99c;
+    --ink-faint: #75766b; --line: #33342c; --tag-bg-hover: #eeeee6; --tag-fg-hover: #131310;
+    --focus-ring: #eeeee6; --accent: #e08a6e;
+    --topbar-bg: rgba(19,19,16,0.78);
+  }
+  body{ transition: background-color 0.2s ease, color 0.2s ease; }
   *{ box-sizing: border-box; }
   html, body{ margin: 0; padding: 0; }
+  @media (prefers-reduced-motion: no-preference){ html{ scroll-behavior: smooth; } }
   body{
     background: var(--paper); color: var(--ink);
     font-family: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
     -webkit-font-smoothing: antialiased; min-height: 100vh;
   }
-  .wrap{ display: flex; justify-content: center; padding: clamp(2.5rem, 6vw, 6.5rem) 1.5rem 4rem; }
+  .wrap{ display: flex; justify-content: center; padding: 0 1.5rem 4rem; }
   .sheet{ width: 100%; max-width: 40rem; }
 
-  /* top bar: site nav + language toggle (smart sticky: translucent, hides on scroll down, reappears on scroll up) */
   .topbar{
     position: fixed; top: 0; left: 0; right: 0; z-index: 20;
     display: flex; justify-content: space-between; align-items: center;
     padding: 1.1rem 1.2rem; pointer-events: none;
-    background: rgba(240,241,238,0.78);
+    background: var(--topbar-bg);
     backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-    transition: transform 0.25s ease;
-  }
-  @media (prefers-color-scheme: dark){
-    .topbar{ background: rgba(19,19,16,0.78); }
+    transition: transform 0.25s ease, background-color 0.2s ease;
   }
   .topbar.nav-hidden{ transform: translateY(-100%); }
   .topbar > *{ pointer-events: auto; }
+  /* Minha História / Blog / Listas: visible for context, deliberately not links.
+     Pages still exist at their URLs (noindex'd), just not promoted from here. */
   .sitenav{
     display: flex; gap: 1.1rem; list-style: none; margin: 0; padding: 0;
     font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.76rem; letter-spacing: 0.03em;
   }
-  .sitenav a{ color: var(--ink-soft); text-decoration: none; padding: 0.3rem 0; border-bottom: 1px solid transparent; }
-  .sitenav a:hover{ color: var(--ink); }
-  .sitenav a[aria-current="page"]{ color: var(--ink); border-bottom-color: var(--accent); }
+  .sitenav .current{ color: var(--ink); border-bottom: 1px solid var(--accent); padding-bottom: 0.2rem; }
+  .sitenav .disabled{ color: var(--ink-faint); cursor: default; }
+  @media (max-width: 30rem){ .sitenav{ display: none; } }
   .langtoggle{
     display: flex; border: 1px solid var(--ink); border-radius: 3px; overflow: hidden;
     font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.72rem; letter-spacing: 0.04em;
@@ -63,23 +107,86 @@
   html[data-lang="pt"] .langtoggle button[data-set="pt"],
   html[data-lang="en"] .langtoggle button[data-set="en"]{ background: var(--ink); color: var(--paper-raised); }
 
+  .topbar-controls{ display: flex; gap: 0.7rem; align-items: center; }
+  .theme-toggle-btn{
+    appearance: none; background: none; border: none; padding: 0;
+    width: 28px; height: 28px; position: relative;
+    display: flex; align-items: center; justify-content: center; cursor: pointer;
+    color: var(--ink-soft);
+  }
+  .theme-toggle-btn:hover{ color: var(--ink); }
+  .theme-toggle-btn:focus-visible{ outline: 2px solid var(--focus-ring); outline-offset: 2px; border-radius: 50%; }
+  .theme-toggle-btn svg{
+    width: 17px; height: 17px; position: absolute; stroke: currentColor;
+  }
+  /* Smooth crossfade + rotate between the two icons, guarded for reduced motion. */
+  .theme-toggle-btn .icon-moon{ opacity: 0; transform: rotate(-90deg) scale(0.6); }
+  html[data-theme="dark"] .theme-toggle-btn .icon-sun{ opacity: 0; transform: rotate(90deg) scale(0.6); }
+  html[data-theme="dark"] .theme-toggle-btn .icon-moon{ opacity: 1; transform: rotate(0) scale(1); }
+  html[data-theme="light"] .theme-toggle-btn .icon-sun{ opacity: 1; transform: rotate(0) scale(1); }
+  html[data-theme="light"] .theme-toggle-btn .icon-moon{ opacity: 0; transform: rotate(-90deg) scale(0.6); }
+  @media (prefers-color-scheme: dark){
+    html:not([data-theme="light"]) .theme-toggle-btn .icon-sun{ opacity: 0; transform: rotate(90deg) scale(0.6); }
+    html:not([data-theme="light"]) .theme-toggle-btn .icon-moon{ opacity: 1; transform: rotate(0) scale(1); }
+  }
+  @media (prefers-reduced-motion: no-preference){
+    .theme-toggle-btn svg{ transition: opacity 0.35s ease, transform 0.35s ease; }
+  }
+
+  /* top banner: EESC gate photo, full width of the sheet, breaks the usual side padding.
+     Border/rounding lives on the <img> itself, not the <figure>, so the caption below
+     never reads as boxed-in. */
+  .hero-banner{ margin: 0 -1.5rem 2.4rem; }
+  .hero-banner img{
+    width: 100%; height: 15rem; object-fit: cover; object-position: center 65%;
+    display: block; filter: saturate(0.85);
+  }
+  .hero-banner figcaption{
+    text-align: right;
+    font-family: "IBM Plex Mono", monospace; font-size: 0.7rem; color: var(--ink-faint);
+    letter-spacing: 0.02em; padding: 0.6rem 1.5rem 0;
+  }
+  @media (min-width: 43rem){
+    .wrap{ padding-top: clamp(2.5rem, 6vw, 6.5rem); }
+    .hero-banner{ margin: 0 0 2.4rem; }
+    .hero-banner img{ border-radius: 8px; border: 1px solid var(--line); }
+    .hero-banner figcaption{ padding: 0.6rem 0.1rem 0; }
+  }
+  @media (max-width: 42.99rem){ .hero-banner{ margin-top: 3.6rem; } }
+
   .eyebrow{
     font-family: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
     font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--ink-soft); margin: 2.6rem 0 1.1rem;
+    color: var(--ink-soft); margin: 0 0 1.1rem;
   }
   h1{
     font-family: "Newsreader", ui-serif, Georgia, "Times New Roman", serif;
     font-weight: 500; font-size: clamp(2.1rem, 5.4vw, 3.15rem);
     line-height: 1.08; letter-spacing: -0.01em; margin: 0 0 0.85rem; text-wrap: balance;
   }
-  .tagline{
+  .tagline{ margin: 0 0 2.4rem; max-width: 34rem; }
+  .tagline p{
     font-family: "Newsreader", ui-serif, Georgia, serif;
     font-style: italic; font-weight: 400; font-size: clamp(1.05rem, 2.3vw, 1.28rem);
-    line-height: 1.55; color: var(--ink-soft); max-width: 34rem; margin: 0 0 2.1rem; text-wrap: balance;
+    line-height: 1.55; color: var(--ink-soft); margin: 0; text-wrap: balance;
+  }
+  .tagline cite{
+    display: block; font-style: normal; text-align: left;
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.78rem;
+    letter-spacing: 0.03em; color: var(--ink-faint); margin-top: 0.7rem;
   }
   .rule{ border: none; border-top: 1px solid var(--line); margin: 0 0 1.9rem; }
-  .links{ display: flex; flex-wrap: wrap; gap: 0.65rem; margin: 0 0 2.4rem; padding: 0; list-style: none; }
+
+  .section-nav{
+    display: flex; flex-wrap: wrap; justify-content: center; text-align: center; gap: 0.3em 0;
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.74rem;
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 2.6rem;
+  }
+  .section-nav a{ color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid transparent; }
+  .section-nav a:hover, .section-nav a:focus-visible{ color: var(--ink); border-bottom-color: var(--accent); }
+  .section-nav .sep{ color: var(--ink-faint); margin: 0 0.55em; }
+
+  .links{ display: flex; flex-wrap: wrap; gap: 0.65rem; margin: 0; padding: 0; list-style: none; }
   .links a{
     display: inline-flex; align-items: center; gap: 0.4em;
     font-family: "IBM Plex Sans", sans-serif; font-size: 0.86rem; font-weight: 500;
@@ -89,11 +196,6 @@
   .links a:hover, .links a:focus-visible{ background: var(--tag-bg-hover); color: var(--tag-fg-hover); }
   .links a:focus-visible{ outline: 2px solid var(--focus-ring); outline-offset: 2px; }
   .links a .arrow{ font-family: "IBM Plex Mono", monospace; font-size: 0.82em; }
-  .focus-areas{
-    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.78rem;
-    letter-spacing: 0.04em; color: var(--ink-soft); line-height: 1.9; margin: 0 0 3rem;
-  }
-  .focus-areas .sep{ color: var(--ink-faint); margin: 0 0.55em; }
 
   section{ margin: 0 0 3.4rem; }
   section > h2{
@@ -101,35 +203,142 @@
     letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft);
     margin: 0 0 1.3rem; padding-top: 1.9rem; border-top: 1px solid var(--line);
   }
-  .about-grid{ display: grid; grid-template-columns: 8.5rem 1fr; gap: 1.6rem; align-items: start; }
-  .about-grid img{ width: 8.5rem; height: auto; border-radius: 4px; border: 1px solid var(--line); object-fit: cover; }
-  @media (max-width: 30rem){
-    .about-grid{ grid-template-columns: 1fr; }
-    .about-grid img{ width: 6.5rem; }
+  .prose img.portrait{
+    float: left; width: 10rem; height: auto; margin: 0.2rem 1.5rem 0.9rem 0;
+    border-radius: 4px; border: 1px solid var(--line); object-fit: cover;
   }
+  @media (max-width: 28rem){ .prose img.portrait{ float: none; display: block; margin: 0 0 1.2rem; width: 8rem; } }
+  .prose{ overflow: auto; } /* contain the float so section spacing below is correct */
   .prose p{
     font-family: "Newsreader", ui-serif, Georgia, serif; font-size: 1.05rem;
     line-height: 1.68; color: var(--ink); margin: 0 0 1.05rem;
   }
   .prose p:last-child{ margin-bottom: 0; }
-  .prose .cta{
-    font-family: "IBM Plex Mono", monospace; font-size: 0.78rem; letter-spacing: 0.02em;
-    color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor;
-  }
 
-  .cards{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
-  @media (max-width: 48rem){ .cards{ grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 34rem){ .cards{ grid-template-columns: 1fr; } }
-  .card{ background: var(--paper-raised); border: 1px solid var(--line); border-radius: 6px; padding: 1.3rem 1.4rem; display: flex; flex-direction: column; }
-  .card h3{ font-family: "Newsreader", ui-serif, Georgia, serif; font-weight: 600; font-size: 1.08rem; margin: 0 0 0.5rem; color: var(--ink); }
-  .card .kicker{ font-family: "IBM Plex Mono", monospace; font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 0.4rem; }
-  .card p:not(.kicker){ font-family: "IBM Plex Sans", sans-serif; font-size: 0.87rem; line-height: 1.58; color: var(--ink-soft); margin: 0 0 0.9rem; flex: 1; }
+  .cards{ display: flex; flex-direction: column; gap: 1rem; }
+  .card{ background: var(--paper-raised); border: 1px solid var(--line); border-radius: 6px; padding: 1.2rem 1.3rem; display: flex; flex-direction: column; }
+  .card h3{ font-family: "Newsreader", ui-serif, Georgia, serif; font-weight: 600; font-size: 1.08rem; margin: 0 0 0.4rem; color: var(--ink); }
+  .card .kicker{ font-family: "IBM Plex Mono", monospace; font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 0.35rem; }
+  .card p:not(.kicker){ font-family: "IBM Plex Sans", sans-serif; font-size: 0.87rem; line-height: 1.58; color: var(--ink-soft); margin: 0 0 0.8rem; }
   .card a{ font-family: "IBM Plex Mono", monospace; font-size: 0.74rem; letter-spacing: 0.02em; color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; align-self: flex-start; }
   .card a:hover{ opacity: 0.75; }
+  @media (prefers-reduced-motion: no-preference){
+    .card{ transition: transform 0.2s ease, box-shadow 0.2s ease; }
+    .card:hover{ transform: translateY(-2px); box-shadow: 0 6px 16px -8px rgba(0,0,0,0.25); }
+  }
 
-  .campus-figure{ margin: 1.6rem 0 0; }
-  .campus-figure img{ width: 100%; height: auto; display: block; border-radius: 6px; border: 1px solid var(--line); filter: saturate(0.82); }
-  .campus-figure figcaption{ font-family: "IBM Plex Mono", monospace; font-size: 0.7rem; color: var(--ink-faint); margin-top: 0.5rem; letter-spacing: 0.02em; }
+  /* gentle reveal-on-scroll for sections: only engages once JS confirms it can also
+     add the "in-view" class back (see script at the end of body) — this way a section
+     never gets stuck invisible if JS fails to load or is disabled. Skipped entirely
+     for reduced-motion users too. */
+  @media (prefers-reduced-motion: no-preference){
+    html.js-reveal section{ opacity: 0; transform: translateY(10px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    html.js-reveal section.in-view{ opacity: 1; transform: translateY(0); }
+  }
+
+  /* experience / education / leadership entries */
+  .exp-list{ display: flex; flex-direction: column; gap: 1.9rem; }
+  .exp-item .exp-meta{
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.4rem 1rem;
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.72rem;
+    letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 0.55rem;
+  }
+  .exp-item .exp-role{
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.2rem 1rem;
+    font-family: "Newsreader", ui-serif, Georgia, serif; font-weight: 600; font-size: 1.05rem;
+    color: var(--ink); margin: 0 0 0.35rem;
+  }
+  .exp-item .exp-role .place{
+    font-family: "IBM Plex Sans", sans-serif; font-weight: 400; font-style: italic;
+    font-size: 0.85rem; color: var(--ink-soft); align-self: flex-end;
+  }
+  .exp-item .exp-dept{
+    font-family: "IBM Plex Sans", sans-serif; font-size: 0.85rem; color: var(--ink-soft);
+    margin: 0 0 0.55rem;
+  }
+  .exp-item .exp-role:last-child, .exp-item .exp-dept:last-child{ margin-bottom: 0; }
+  .exp-bullets{ margin: 0; padding-left: 1.15em; }
+  .exp-bullets li{
+    font-family: "IBM Plex Sans", sans-serif; font-size: 0.87rem; line-height: 1.62;
+    color: var(--ink-soft); margin: 0 0 0.45rem;
+  }
+  .exp-bullets li:last-child{ margin-bottom: 0; }
+  .exp-bullets a, .exp-sub a{ color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
+  .exp-bullets a:hover, .exp-sub a:hover{ opacity: 0.75; }
+  .exp-summary{
+    font-family: "IBM Plex Sans", sans-serif; font-size: 0.87rem; line-height: 1.62;
+    color: var(--ink-soft); margin: 0 0 0.2rem;
+  }
+
+  /* accordion: only the header row (institution/role/dates/place) shows by
+     default; the whole row is the click target, chevron signals there's
+     more. Native <details>/<summary> — works without JS, keyboard- and
+     screen-reader-friendly out of the box, degrades to "just shows the
+     content" if CSS fails rather than hiding it. */
+  .accordion{ border: none; }
+  .accordion-toggle{
+    list-style: none; cursor: pointer; display: flex; align-items: flex-start;
+    justify-content: space-between; gap: 0.8rem;
+  }
+  .accordion-toggle::-webkit-details-marker{ display: none; }
+  .accordion-toggle:focus-visible{ outline: 2px solid var(--focus-ring); outline-offset: 2px; border-radius: 3px; }
+  .accordion-head{ flex: 1; min-width: 0; }
+  .accordion-toggle .chevron{
+    width: 13px; height: 13px; stroke: var(--ink-faint); stroke-width: 2.2; fill: none;
+    flex: none; margin-top: 0.3rem;
+  }
+  .accordion-toggle:hover .chevron{ stroke: var(--ink); }
+  @media (prefers-reduced-motion: no-preference){
+    .accordion-toggle .chevron{ transition: transform 0.25s ease, stroke 0.15s ease; }
+    .accordion-body{ animation: sweep 0.25s ease-in-out; }
+    @keyframes sweep{ 0%{ opacity: 0; transform: translateY(-6px); } 100%{ opacity: 1; transform: translateY(0); } }
+  }
+  .accordion[open] .accordion-toggle .chevron{ transform: rotate(180deg); stroke: var(--accent); }
+  .accordion-body{ padding-top: 0.8rem; }
+  .accordion-body .exp-bullets{ margin-top: 0; }
+
+  /* BTG grouped under one company header, with a small timeline for the 3 roles */
+  .corp-timeline{ position: relative; padding-left: 1.6rem; margin-top: 1.1rem; }
+  .corp-timeline::before{
+    content: ""; position: absolute; left: 0.3rem; top: 0.3rem; bottom: 0.3rem;
+    width: 2px; background: var(--line);
+  }
+  .corp-entry{ position: relative; padding-bottom: 1.6rem; }
+  .corp-entry:last-child{ padding-bottom: 0; }
+  .corp-entry::before{
+    content: ""; position: absolute; left: -1.35rem; top: 0.45rem;
+    width: 0.35rem; height: 0.35rem; border-radius: 50%;
+    background: var(--line);
+  }
+
+  /* tech tags at the end of an expanded entry */
+  .tech-stack{
+    display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.9rem;
+    padding-top: 0.8rem; border-top: 1px dashed var(--line);
+  }
+  .tech-stack .tech-tag{
+    font-family: "IBM Plex Mono", monospace; font-size: 0.68rem; letter-spacing: 0.03em;
+    color: var(--ink-soft); background: var(--paper); border: 1px solid var(--line);
+    border-radius: 3px; padding: 0.22rem 0.55rem;
+  }
+  .exp-sub{ margin: 0.5rem 0 0 0; padding-left: 1.15em; }
+  .exp-sub li{ font-family: "IBM Plex Sans", sans-serif; font-size: 0.83rem; color: var(--ink-soft); margin: 0 0 0.3rem; }
+
+  /* skills — no box-in-box: a thin top rule per category (same separator
+     language as section headers), tags float free with generous white space
+     instead of being nested inside a bordered card. */
+  .skills-groups{ columns: 2 18rem; column-gap: 2rem; }
+  .skills-group{ break-inside: avoid; margin: 0 0 1.3rem; }
+  .skills-group .cat{
+    font-family: "IBM Plex Mono", monospace; font-size: 0.7rem; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--ink-faint); margin: 0 0 0.6rem;
+    border-top: 1px solid var(--line); padding-top: 0.6rem;
+  }
+  .skill-tags{ display: flex; flex-wrap: wrap; gap: 0.45rem; padding: 0; margin: 0; list-style: none; }
+  .skill-tags li{
+    font-family: "IBM Plex Mono", monospace; font-size: 0.76rem; color: var(--ink-soft);
+    border: 1px solid var(--line); border-radius: 3px; padding: 0.28rem 0.6rem; background: var(--paper-raised);
+  }
 
   .cv-options{ display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
   @media (max-width: 34rem){ .cv-options{ grid-template-columns: 1fr; } }
@@ -143,13 +352,7 @@
   }
   .cv-card a.download:hover{ opacity: 0.82; }
 
-  .notice{
-    display: flex; gap: 0.75rem; align-items: flex-start;
-    background: var(--paper-raised); border: 1px dashed var(--line); border-radius: 6px;
-    padding: 0.95rem 1.1rem; margin: 0 0 2rem;
-  }
-  .notice .dot{ flex: none; width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--accent); margin-top: 0.5rem; }
-  .notice p{ font-family: "IBM Plex Sans", sans-serif; font-size: 0.83rem; line-height: 1.55; color: var(--ink-soft); margin: 0; }
+  .contact-section h2{ margin-bottom: 1.1rem; }
 
   footer{
     display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
@@ -180,65 +383,544 @@
 </head>
 <body>
   <div class="topbar">
-    <ul class="sitenav">
-      <li><a href="index.html" aria-current="page"><span data-lang-el="pt">Início</span><span data-lang-el="en">Home</span></a></li>
-      <li><a href="historia.html"><span data-lang-el="pt">Minha História</span><span data-lang-el="en">My Story</span></a></li>
-      <li><a href="blog.html">Blog</a></li>
-      <li><a href="listas.html"><span data-lang-el="pt">Listas</span><span data-lang-el="en">Lists</span></a></li>
+    <ul class="sitenav" aria-label="Páginas do site / Site pages">
+      <li><span class="current"><span data-lang-el="pt">Início</span><span data-lang-el="en">Home</span></span></li>
+      <li><span class="disabled" aria-disabled="true"><span data-lang-el="pt">Minha História</span><span data-lang-el="en">My Story</span></span></li>
+      <li><span class="disabled" aria-disabled="true">Blog</span></li>
+      <li><span class="disabled" aria-disabled="true"><span data-lang-el="pt">Listas</span><span data-lang-el="en">Lists</span></span></li>
     </ul>
-    <div class="langtoggle" role="group" aria-label="Idioma / Language">
-      <button type="button" data-set="pt" aria-pressed="true">PT</button>
-      <button type="button" data-set="en" aria-pressed="false">EN</button>
+    <div class="topbar-controls">
+      <button type="button" id="theme-toggle" class="theme-toggle-btn" aria-label="Alternar tema claro/escuro / Toggle light/dark theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"></circle><path d="M12 3v2.2M12 18.8V21M4.5 4.5l1.55 1.55M17.95 17.95 19.5 19.5M3 12h2.2M18.8 12H21M4.5 19.5l1.55-1.55M17.95 6.05 19.5 4.5"></path></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.6 6.6 0 0 0 10.5 10.5Z"></path></svg>
+      </button>
+      <div class="langtoggle" role="group" aria-label="Idioma / Language">
+        <button type="button" data-set="pt" aria-pressed="false">PT</button>
+        <button type="button" data-set="en" aria-pressed="true">EN</button>
+      </div>
     </div>
   </div>
 
   <div class="wrap">
   <div class="sheet">
+
+    <figure class="hero-banner">
+      <img src="assets/eesc-portal.jpg" alt="Portal vermelho na Escola de Engenharia de São Carlos (EESC), USP" loading="eager">
+      <figcaption>
+        <span data-lang-el="pt">Portal da EESC, USP São Carlos</span>
+        <span data-lang-el="en">EESC gateway, USP São Carlos campus</span>
+      </figcaption>
+    </figure>
+
     <p class="eyebrow">São Carlos, São Paulo, Brasil</p>
     <h1>Felipi Adenildo Soares Sousa</h1>
-    <p class="tagline">
-      <span data-lang-el="pt">Sou engenheiro de computação e o primeiro da minha família a terminar uma universidade pública. O caminho até aqui não foi direto, e talvez por isso o trabalho que mais gosto de contar tenha nascido de uma curiosidade antiga, de antes da faculdade: usar tecnologia para cuidar de bichos que ninguém mais está cuidando.</span>
-      <span data-lang-el="en">I'm a computer engineer, the first in my family to finish a public university. The path here wasn't a straight one, and maybe that's why the project I most like to talk about grew out of an old curiosity, from before college: using technology to look after animals that no one else is looking after.</span>
-    </p>
+    <blockquote class="tagline">
+      <!-- Quote kept in the original Portuguese regardless of site language, by Felipi's choice. -->
+      <p>"O correr da vida embrulha tudo. A vida é assim: esquenta e esfria, aperta e daí afrouxa, sossega e depois desinquieta. O que ela quer da gente é coragem."</p>
+      <cite>Guimarães Rosa, <em>Grande Sertão: Veredas</em> (1956)</cite>
+    </blockquote>
 
     <hr class="rule">
 
-    <ul class="links">
-      <li><a href="https://www.linkedin.com/in/felipiadenildo/" target="_blank" rel="noopener">LinkedIn <span class="arrow">&#8599;</span></a></li>
-      <li><a href="https://github.com/felipiadenildo" target="_blank" rel="noopener">GitHub <span class="arrow">&#8599;</span></a></li>
-      <li><a href="https://www.instagram.com/felipiadenildo/" target="_blank" rel="noopener">Instagram <span class="arrow">&#8599;</span></a></li>
-      <li><a href="weixin://dl/chat?felipiadenildo" target="_blank" rel="noopener">WeChat <span class="arrow">&#8599;</span></a></li>
-      <li><a href="mailto:felipiadenildo@gmail.com">Email <span class="arrow">&#8599;</span></a></li>
-    </ul>
-
-    <p class="focus-areas"><span data-lang-el="pt">ENGENHARIA</span><span data-lang-el="en">ENGINEERING</span><span class="sep">&middot;</span><span data-lang-el="pt">COMPUTAÇÃO</span><span data-lang-el="en">COMPUTING</span><span class="sep">&middot;</span>SOFTWARE<span class="sep">&middot;</span><span data-lang-el="pt">VISÃO COMPUTACIONAL</span><span data-lang-el="en">COMPUTER VISION</span><span class="sep">&middot;</span><span data-lang-el="pt">AUTOMAÇÃO</span><span data-lang-el="en">AUTOMATION</span></p>
+    <p class="section-nav">
+      <a href="#sobre-h"><span data-lang-el="pt">Sobre</span><span data-lang-el="en">About</span></a><span class="sep">&middot;</span><a href="#experiencia-h"><span data-lang-el="pt">Experiência</span><span data-lang-el="en">Experience</span></a><span class="sep">&middot;</span><a href="#formacao-h"><span data-lang-el="pt">Formação</span><span data-lang-el="en">Education</span></a><span class="sep">&middot;</span><a href="#competencias-h"><span data-lang-el="pt">Competências</span><span data-lang-el="en">Skills</span></a><span class="sep">&middot;</span><a href="#destaques-h"><span data-lang-el="pt">Destaques</span><span data-lang-el="en">Highlights</span></a><span class="sep">&middot;</span><a href="#cv-h"><span data-lang-el="pt">Currículo</span><span data-lang-el="en">Résumé</span></a>
+    </p>
 
     <section aria-labelledby="sobre-h">
       <h2 id="sobre-h"><span data-lang-el="pt">Sobre</span><span data-lang-el="en">About</span></h2>
-      <div class="about-grid">
-        <img src="assets/retrato.jpg" alt="Foto de Felipi Adenildo Soares Sousa" loading="lazy">
-        <div class="prose">
-          <div data-lang-el="pt">
-            <p>Sou formado em Engenharia de Computação pela USP São Carlos, o primeiro da minha família a concluir uma universidade pública. Cheguei até aqui depois de passar por Teresina, Fortaleza e Belém em busca do curso certo; hoje trabalho com desenvolvimento de software, automatizando processos e integrando sistemas para bancos e empresas de tecnologia.</p>
-            <p>No trabalho de conclusão de curso, voltei a um interesse antigo, que vem da infância na roça dos meus avós: usar visão computacional para ajudar a identificar, individualmente, os gatos de uma colônia comunitária no campus, algo que antes só dava pra fazer olhando de perto, um por um. É o projeto de que mais me orgulho até hoje.</p>
-            <p>Também dediquei parte da graduação à representação estudantil, com 14 mandatos em colegiados universitários entre 2019 e 2023, e sigo envolvido como voluntário num projeto de extensão dedicado ao bem-estar animal. Os dois estão detalhados na seção de destaques, logo abaixo.</p>
-            <p><a class="cta" href="historia.html">A versão completa dessa trajetória, ainda sendo escrita &#8594;</a></p>
+      <div class="prose">
+        <img class="portrait" src="assets/retrato.jpg" alt="Foto de Felipi Adenildo Soares Sousa" loading="lazy">
+        <div data-lang-el="pt">
+          <p>Cursei Engenharia de Computação na Universidade de São Paulo. Nos últimos anos, uni desenvolvimento de software, automação e visão computacional para resolver problemas reais: <strong>três anos</strong> automatizando processos num banco, e um trabalho de conclusão de curso aplicando visão computacional ao manejo ético de uma colônia de gatos no campus onde estudei. O que mais gosto no meu trabalho é entender um processo de ponta a ponta antes de escrever a primeira linha de código.</p>
+        </div>
+        <div data-lang-el="en">
+          <p>I studied Computer Engineering at the University of São Paulo. In recent years, I've combined software development, automation, and computer vision to solve real problems: <strong>three years</strong> automating processes at a bank, and an undergraduate thesis applying computer vision to the ethical management of a cat colony on the campus where I studied. What I care about most in my work is understanding a process end to end before writing the first line of code.</p>
+        </div>
+
+        <details class="accordion">
+          <summary class="accordion-toggle">
+            <span data-lang-el="pt">Ler trajetória completa</span><span data-lang-el="en">Read full background</span>
+            <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </summary>
+          <div class="accordion-body">
+            <div data-lang-el="pt">
+              <p>Durante a graduação, trabalhei três anos em um banco, na área de automação. Atuei em projetos para diversas áreas da instituição, principalmente para o <em>middle-office</em>. Como estagiário de verão, fiquei alocado no time de Seguros, corrigindo e migrando planilhas de Excel e VBA conectadas a bancos de dados que ainda acumulavam erros e furos de auditoria. Propus melhorias e apliquei correções para que a solução pudesse ser atualizada de acordo com as necessidades e as tecnologias mais adequadas.</p>
+              <p>Em seguida, participei de um projeto importante de rastreamento de assinaturas de contrato, no qual o time de Formalização acompanhava cada contrato de forma manual e individual. O fluxo foi substituído por uma solução de automação com frameworks de <em>front-end</em>, integrações de API e serviços de AWS, trazendo eficiência, ganho de tempo e redução de erros para centenas de documentos diariamente. Nesse mesmo período, também usei o <strong>Power BI</strong> para organizar os dados que as áreas produziam, dando números para priorizar demandas e enxergar gargalos.</p>
+              <p>Conforme fui adquirindo experiência e passava a integrar soluções maiores da instituição, assumi a responsabilidade de acompanhar e gerir projetos, incluindo a seleção e o acompanhamento técnico de novos estagiários. Participei de projetos relevantes de integração entre soluções da área e de projetos menores, alguns sob minha responsabilidade direta: um de suporte à organização de documentos fiscais e contábeis da instituição, e outro de suporte técnico durante a aquisição de <strong>uma unidade na Europa</strong>, onde precisei discutir e traduzir decisões técnicas.</p>
+              <p>Depois, passei um semestre numa consultoria de tecnologia, desenvolvendo backend e modelagem de banco de dados para produtos de automação com inteligência artificial voltados à gestão de <em>call center</em>.</p>
+              <p>Na universidade, atuei na secretaria acadêmica do curso e ajudei a organizar a Semana da Engenharia de Computação em duas edições, articulando, em palestras e processos seletivos, a participação do banco em que trabalhei e abrindo oportunidades para outros alunos do campus.</p>
+              <p>Em paralelo, na universidade, ajudei a fundar um grupo de extensão da USP dedicado à colônia de gatos comunitários do campus, cuidando de captura, esterilização e devolução em parceria com ONGs e protetores da cidade. Esse trabalho virou <strong>meu tema de conclusão de curso</strong>: um <em>pipeline</em> de visão computacional pensado para tornar esse manejo mais ético e mais eficiente.</p>
+              <p>Além disso, fui representante discente na universidade por <strong>catorze mandatos</strong>, em seis colegiados e comissões da EESC e do ICMC, órgãos com direito a voto que decidem regras de curso, orçamento e infraestrutura ao lado de professores e da direção.</p>
+              <p>Antes da faculdade, ajudei alunos do ensino médio com matemática, física e química em cursinhos da minha cidade. Sou apaixonado por animais desde criança, já participei de diversos resgates em parceria com ONGs e protetores locais. Também gosto de ciência, computação e jogos.</p>
+            </div>
+            <div data-lang-el="en">
+              <p>During my degree, I spent three years working at a bank, in the automation area. I worked on projects for several parts of the institution, mostly for the <em>middle office</em>. As a summer intern, I was placed on the Insurance team, fixing and migrating Excel and VBA spreadsheets connected to databases that still carried errors and audit gaps. I proposed improvements and applied fixes so the solution could be brought up to date with proper needs and technology.</p>
+              <p>I then joined an important project tracking contract signatures, where the Formalization team followed up on every contract manually, one by one. That workflow was replaced with an automated solution built with <em>front-end</em> frameworks, API integrations, and AWS services, bringing efficiency, time savings, and fewer errors to hundreds of documents a day. During that same period, I also used <strong>Power BI</strong> to organize the data these areas were producing, giving them numbers to prioritize work and spot bottlenecks.</p>
+              <p>As I gained experience and started integrating larger solutions across the institution, I took on responsibility for tracking and managing projects, including interviewing and technically mentoring new interns. I worked on major projects integrating different solutions across the area, and on smaller ones I was directly responsible for: one supporting the organization of the institution's tax and accounting records, and another providing technical support during the acquisition of <strong>a unit in Europe</strong>, where I had to discuss and translate technical decisions.</p>
+              <p>Afterward, I spent a semester at a technology consultancy, building backend and database models for AI-driven automation products aimed at <em>call center</em> management.</p>
+              <p>At university, I worked in the program's academic office and helped organize Computer Engineering Week twice, coordinating the participation of the bank I worked for in talks and recruitment processes, in the process opening opportunities for other students on campus.</p>
+              <p>Alongside that, I helped found a university extension group dedicated to the campus's community cat colony, handling trapping, neutering, and release in partnership with local NGOs and caregivers. That work became <strong>the subject of my undergraduate thesis</strong>: a computer vision <em>pipeline</em> meant to make that management more ethical and more efficient.</p>
+              <p>I also served <strong>fourteen terms</strong> as an elected student representative, on six university committees and boards, bodies with voting power over course rules, budget, and infrastructure alongside faculty and the administration.</p>
+              <p>Before university, I helped high school students with math, physics, and chemistry at prep schools in my hometown. I've been passionate about animals since childhood, and I've taken part in several rescues in partnership with NGOs and local caregivers. I also enjoy science, computing, and games.</p>
+            </div>
           </div>
-          <div data-lang-el="en">
-            <p>I'm a Computer Engineer from the University of São Paulo, the first in my family to graduate from a public university. I got here after passing through Teresina, Fortaleza, and Belém looking for the right program; today I work in software development, automating processes and integrating systems for banks and tech companies.</p>
-            <p>For my undergraduate thesis, I returned to an old interest that started in childhood, on my grandparents' land: using computer vision to help identify, individually, the cats in a community colony on campus, something that used to only be possible by looking closely, one by one. It's the project I'm proudest of to this day.</p>
-            <p>I also spent part of my degree on student representation, with 14 terms across university committees between 2019 and 2023, and I'm still involved as a volunteer with an animal-welfare extension project. Both are detailed in the highlights section below.</p>
-            <p><a class="cta" href="historia.html">The full story, still being written &#8594;</a></p>
+        </details>
+      </div>
+    </section>
+
+    <section aria-labelledby="experiencia-h">
+      <h2 id="experiencia-h"><span data-lang-el="pt">Experiência</span><span data-lang-el="en">Experience</span></h2>
+      <div class="exp-list">
+
+        <article class="exp-item">
+          <details class="accordion">
+            <summary class="accordion-toggle">
+              <div class="accordion-head">
+                <p class="exp-meta"><span>HVAR</span><span>Jan 2024 &ndash; Jun 2024</span></p>
+                <p class="exp-role">
+                  <span><span data-lang-el="pt">Estagiário (Desenvolvedor de Software)</span><span data-lang-el="en">Software Developer Intern</span></span>
+                  <span class="place"><span data-lang-el="pt">Remoto, SP</span><span data-lang-el="en">Remote, SP</span></span>
+                </p>
+              </div>
+              <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </summary>
+            <div class="accordion-body">
+              <div data-lang-el="pt"><ul class="exp-bullets">
+                <li>Desenvolveu módulos de backend e modelagem de banco de dados em Python para um produto de Inteligência Artificial voltado à gestão de call centers.</li>
+                <li>Automatizou fluxos de dados internos, reduzindo tarefas manuais e apoiando diretamente as operações da equipe.</li>
+              </ul></div>
+              <div data-lang-el="en"><ul class="exp-bullets">
+                <li>Built backend modules and database models in Python for an AI product used in call center management.</li>
+                <li>Automated internal data flows, cutting down manual work and directly supporting the operations team.</li>
+              </ul></div>
+              <div class="tech-stack">
+                <span class="tech-tag">Python</span><span class="tech-tag">Backend</span><span class="tech-tag">Database Modeling</span><span class="tech-tag">AI Integration</span>
+              </div>
+            </div>
+          </details>
+        </article>
+
+        <article class="exp-item">
+          <p class="exp-meta"><span>BTG Pactual</span><span>Jul 2020 &ndash; Nov 2023</span></p>
+          <div class="corp-timeline">
+
+            <div class="corp-entry">
+              <details class="accordion">
+                <summary class="accordion-toggle">
+                  <div class="accordion-head">
+                    <p class="exp-role">
+                      <span><span data-lang-el="pt">Assistente Bancário</span><span data-lang-el="en">Banking Assistant</span></span>
+                      <span class="place">Nov 2022&ndash;Nov 2023 &middot; <span data-lang-el="pt">São Paulo, SP (Híbrido)</span><span data-lang-el="en">São Paulo, SP (Hybrid)</span></span>
+                    </p>
+                  </div>
+                  <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </summary>
+                <div class="accordion-body">
+                  <div data-lang-el="pt"><ul class="exp-bullets">
+                    <li>Desenvolveu e manteve pipelines de automação em Python, JavaScript e AWS (EC2, S3, RDS, Lambda), incluindo a integração das APIs da Clicksign e DocuSign para automatizar a geração, formalização e o registro de documentos de clientes, aumentando a escalabilidade e a resiliência operacional dos sistemas internos.</li>
+                    <li>Deu suporte técnico direto a um cliente interno em Luxemburgo durante um processo de aquisição bancária, coordenando fluxos documentais em nuvem.</li>
+                    <li>Documentou tecnicamente os projetos de automação e participou da contratação, integração e gestão de novos estagiários.</li>
+                  </ul></div>
+                  <div data-lang-el="en"><ul class="exp-bullets">
+                    <li>Built and maintained automation pipelines in Python, JavaScript, and AWS (EC2, S3, RDS, Lambda), including integrating the Clicksign and DocuSign APIs to automate document generation, formalization, and record-keeping for clients, increasing the scalability and operational resilience of internal systems.</li>
+                    <li>Provided direct technical support to an internal client in Luxembourg during a banking acquisition process, coordinating cloud-based document workflows.</li>
+                    <li>Documented automation projects and took part in hiring, onboarding, and managing new interns.</li>
+                  </ul></div>
+                  <div class="tech-stack">
+                    <span class="tech-tag">Python</span><span class="tech-tag">JavaScript</span><span class="tech-tag">AWS (EC2, S3, RDS, Lambda)</span><span class="tech-tag">Clicksign</span><span class="tech-tag">DocuSign</span>
+                  </div>
+                </div>
+              </details>
+            </div>
+
+            <div class="corp-entry">
+              <details class="accordion">
+                <summary class="accordion-toggle">
+                  <div class="accordion-head">
+                    <p class="exp-role">
+                      <span><span data-lang-el="pt">Estagiário</span><span data-lang-el="en">Intern</span></span>
+                      <span class="place">Jan 2021&ndash;Nov 2022 &middot; <span data-lang-el="pt">São Paulo, SP (Remoto)</span><span data-lang-el="en">São Paulo, SP (Remote)</span></span>
+                    </p>
+                  </div>
+                  <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </summary>
+                <div class="accordion-body">
+                  <div data-lang-el="pt"><ul class="exp-bullets">
+                    <li>Liderou a construção ponta a ponta de um sistema de rastreamento de assinaturas de documentos em tempo real, em Python e integrado à API da Clicksign, com um dashboard web reativo que permitiu aos analistas acompanhar o status dos documentos diretamente, eliminando o acompanhamento manual anterior.</li>
+                    <li>Organizou, em Power BI, os dados produzidos pelos times de middle-office e formalização, dando a essas áreas indicadores para priorizar demandas e identificar gargalos operacionais.</li>
+                    <li>Coordenou projetos de automação que conectavam diferentes áreas do banco, com responsabilidade direta sobre entregas e acompanhamento técnico de novos estagiários, incluindo o projeto de modernização que migrou sistemas legados para uma stack mais atual (AWS, React, Python, SQL e NoSQL).</li>
+                  </ul></div>
+                  <div data-lang-el="en"><ul class="exp-bullets">
+                    <li>Led the end-to-end build of a real-time document-signature tracking system in Python, integrated with the Clicksign API, including a reactive web dashboard that let analysts track document status directly, replacing what had been a manual process.</li>
+                    <li>Organized, in Power BI, the data produced by the middle-office and formalization teams, giving those areas indicators to prioritize demands and identify operational bottlenecks.</li>
+                    <li>Coordinated automation projects that connected different areas of the bank, with direct responsibility for delivery and for mentoring new interns, including a modernization effort that migrated legacy systems to a more current stack (AWS, React, Python, SQL, and NoSQL).</li>
+                  </ul></div>
+                  <div class="tech-stack">
+                    <span class="tech-tag">Python</span><span class="tech-tag">Clicksign API</span><span class="tech-tag">Power BI</span><span class="tech-tag">AWS</span><span class="tech-tag">React</span><span class="tech-tag">SQL / NoSQL</span>
+                  </div>
+                </div>
+              </details>
+            </div>
+
+            <div class="corp-entry">
+              <details class="accordion">
+                <summary class="accordion-toggle">
+                  <div class="accordion-head">
+                    <p class="exp-role">
+                      <span>Summer Intern</span>
+                      <span class="place">Jul&ndash;Aug 2020 &middot; <span data-lang-el="pt">São Paulo, SP (Remoto)</span><span data-lang-el="en">São Paulo, SP (Remote)</span></span>
+                    </p>
+                  </div>
+                  <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </summary>
+                <div class="accordion-body">
+                  <div data-lang-el="pt"><ul class="exp-bullets">
+                    <li>Desenvolveu scripts em VBA, SQL Server e Python para automatizar tarefas administrativas do setor de Seguros durante o período de estágio de verão.</li>
+                  </ul></div>
+                  <div data-lang-el="en"><ul class="exp-bullets">
+                    <li>Wrote scripts in VBA, SQL Server, and Python to automate administrative tasks for the Insurance division during the summer internship.</li>
+                  </ul></div>
+                  <div class="tech-stack">
+                    <span class="tech-tag">VBA</span><span class="tech-tag">SQL Server</span><span class="tech-tag">Python</span>
+                  </div>
+                </div>
+              </details>
+            </div>
+
           </div>
+        </article>
+
+        <article class="exp-item">
+          <details class="accordion">
+            <summary class="accordion-toggle">
+              <div class="accordion-head">
+                <p class="exp-meta"><span data-lang-el="pt">Objetivo Teresina / Aulas Particulares</span><span data-lang-el="en">Objetivo Teresina / Private Tutoring</span><span>Mar 2017 &ndash; Dec 2018</span></p>
+                <p class="exp-role">
+                  <span><span data-lang-el="pt">Monitor / Tutor de Ciências Exatas</span><span data-lang-el="en">Science Tutor</span></span>
+                  <span class="place"><span data-lang-el="pt">Teresina, PI</span><span data-lang-el="en">Teresina, PI</span></span>
+                </p>
+              </div>
+              <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </summary>
+            <div class="accordion-body">
+              <div data-lang-el="pt"><ul class="exp-bullets">
+                <li>Foi monitor de Matemática, Física e Química no cursinho Objetivo Teresina, depois tutor particular autônomo, ajudando alunos do ensino médio a desenvolver raciocínio lógico e a resolver problemas.</li>
+              </ul></div>
+              <div data-lang-el="en"><ul class="exp-bullets">
+                <li>Tutored Math, Physics, and Chemistry at Objetivo Teresina prep school, then worked as a self-employed private tutor, helping high school students develop logical reasoning and problem-solving skills.</li>
+              </ul></div>
+            </div>
+          </details>
+        </article>
+
+      </div>
+    </section>
+
+    <section aria-labelledby="formacao-h">
+      <h2 id="formacao-h"><span data-lang-el="pt">Formação</span><span data-lang-el="en">Education</span></h2>
+      <div class="exp-list">
+
+        <article class="exp-item">
+          <details class="accordion">
+            <summary class="accordion-toggle">
+              <div class="accordion-head">
+                <p class="exp-meta"><span>Universidade de São Paulo (USP)</span><span>Feb 2019 &ndash; Jul 2026</span></p>
+                <p class="exp-role">
+                  <span><span data-lang-el="pt">Bacharelado em Engenharia de Computação</span><span data-lang-el="en">B.S. in Computer Engineering</span></span>
+                  <span class="place"><span data-lang-el="pt">São Carlos, SP</span><span data-lang-el="en">São Carlos, SP</span></span>
+                </p>
+              </div>
+              <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </summary>
+            <div class="accordion-body">
+              <p class="exp-dept">
+                <span data-lang-el="pt">Escola de Engenharia de São Carlos (EESC) &amp; Instituto de Ciências Matemáticas e de Computação (ICMC)</span>
+                <span data-lang-el="en">São Carlos School of Engineering (EESC) &amp; Institute of Mathematical and Computer Sciences (ICMC)</span>
+              </p>
+              <div data-lang-el="pt"><ul class="exp-bullets">
+                <li><strong>Monografia:</strong> Estudo e Concepção de um Sistema de Monitoramento e Apoio ao Manejo por Visão Computacional para a Colônia de Gatos da USP São Carlos. <strong>Orientador:</strong> Prof. Dr. Matheus Machado dos Santos. <strong>Código:</strong> <a href="https://github.com/felipiadenildo/felinet" target="_blank" rel="noopener"><em>felinet</em> no GitHub</a>.</li>
+                <li>Projetou um pipeline de visão computacional em 4 fases (ingestão, detecção de fauna, classificação de espécie e reidentificação individual). Integrou os modelos MegaDetector, SpeciesNet, MegaDescriptor e PetFace, com mascaramento de pessoas em conformidade com a LGPD.</li>
+              </ul></div>
+              <div data-lang-el="en"><ul class="exp-bullets">
+                <li><strong>Thesis:</strong> Study and Design of a Computer-Vision-Based Monitoring and Management-Support System for the USP São Carlos Cat Colony. <strong>Advisor:</strong> Prof. Dr. Matheus Machado dos Santos. <strong>Code:</strong> <a href="https://github.com/felipiadenildo/felinet" target="_blank" rel="noopener"><em>felinet</em> on GitHub</a>.</li>
+                <li>Designed a 4-stage computer vision pipeline (ingestion, wildlife detection, species classification, and individual re-identification). Integrated the MegaDetector, SpeciesNet, MegaDescriptor, and PetFace models, with person-masking for LGPD (Brazil's data protection law) compliance.</li>
+              </ul></div>
+            </div>
+          </details>
+        </article>
+
+        <article class="exp-item">
+          <details class="accordion">
+            <summary class="accordion-toggle">
+              <div class="accordion-head">
+                <p class="exp-meta"><span data-lang-el="pt">Escola de Formação de Oficiais da Marinha Mercante (EFOMM)</span><span data-lang-el="en">Merchant Marine Officer Training School (EFOMM)</span><span>Jan 2018 &ndash; Jun 2018</span></p>
+                <p class="exp-role">
+                  <span><span data-lang-el="pt">Ciências Náuticas</span><span data-lang-el="en">Nautical Sciences</span></span>
+                  <span class="place"><span data-lang-el="pt">Belém, PA</span><span data-lang-el="en">Belém, PA</span></span>
+                </p>
+              </div>
+              <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </summary>
+            <div class="accordion-body">
+              <p class="exp-dept"><span data-lang-el="pt">Período cursado.</span><span data-lang-el="en">Coursework, not completed.</span></p>
+            </div>
+          </details>
+        </article>
+
+        <article class="exp-item">
+          <details class="accordion">
+            <summary class="accordion-toggle">
+              <div class="accordion-head">
+                <p class="exp-meta"><span data-lang-el="pt">Universidade Federal do Piauí (UFPI)</span><span data-lang-el="en">Federal University of Piauí (UFPI)</span><span>Jul 2015 &ndash; Dec 2015</span></p>
+                <p class="exp-role">
+                  <span><span data-lang-el="pt">Engenharia Mecânica</span><span data-lang-el="en">Mechanical Engineering</span></span>
+                  <span class="place"><span data-lang-el="pt">Teresina, PI</span><span data-lang-el="en">Teresina, PI</span></span>
+                </p>
+              </div>
+              <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </summary>
+            <div class="accordion-body">
+              <p class="exp-dept"><span data-lang-el="pt">Período cursado.</span><span data-lang-el="en">Coursework, not completed.</span></p>
+            </div>
+          </details>
+        </article>
+
+      </div>
+    </section>
+
+    <section aria-labelledby="competencias-h">
+      <h2 id="competencias-h"><span data-lang-el="pt">Competências</span><span data-lang-el="en">Skills</span></h2>
+      <div class="skills-groups">
+        <div class="skills-group">
+          <p class="cat"><span data-lang-el="pt">Programação</span><span data-lang-el="en">Programming</span></p>
+          <ul class="skill-tags"><li>Python</li><li>C/C++</li><li>SQL</li><li>JavaScript</li><li>Bash/Shell</li><li>Java</li><li>VBA</li></ul>
+        </div>
+        <div class="skills-group">
+          <p class="cat"><span data-lang-el="pt">IA &amp; Visão Computacional</span><span data-lang-el="en">AI &amp; Computer Vision</span></p>
+          <ul class="skill-tags"><li>Edge AI</li><li>YOLOv11</li><li>Object Detection</li><li>PyTorch</li><li>OpenCV</li><li>Data Pipelines</li></ul>
+        </div>
+        <div class="skills-group">
+          <p class="cat"><span data-lang-el="pt">Embarcados &amp; Hardware</span><span data-lang-el="en">Embedded &amp; Hardware</span></p>
+          <ul class="skill-tags"><li>IoT Systems</li><li>Microcontrollers</li><li>Embedded Linux</li><li>Digital Design</li></ul>
+        </div>
+        <div class="skills-group">
+          <p class="cat"><span data-lang-el="pt">Web &amp; Full-Stack</span><span data-lang-el="en">Web &amp; Full-Stack</span></p>
+          <ul class="skill-tags"><li>React</li><li>HTML/CSS</li><li>Node.js</li><li>RESTful APIs</li><li>System Integration</li></ul>
+        </div>
+        <div class="skills-group">
+          <p class="cat"><span data-lang-el="pt">Cloud &amp; Ferramentas</span><span data-lang-el="en">Cloud &amp; Tools</span></p>
+          <ul class="skill-tags"><li>AWS (EC2, S3, RDS, Lambda)</li><li>Power BI</li><li>Docker</li><li>Git</li><li>Linux</li><li>LaTeX</li></ul>
+        </div>
+        <div class="skills-group">
+          <p class="cat"><span data-lang-el="pt">Idiomas</span><span data-lang-el="en">Languages</span></p>
+          <ul class="skill-tags">
+            <li><span data-lang-el="pt">Português (nativo)</span><span data-lang-el="en">Portuguese (native)</span></li>
+            <li><span data-lang-el="pt">Inglês (fluente)</span><span data-lang-el="en">English (fluent)</span></li>
+            <li><span data-lang-el="pt">Espanhol (intermediário/avançado)</span><span data-lang-el="en">Spanish (intermediate/advanced)</span></li>
+            <li><span data-lang-el="pt">Mandarim (básico)</span><span data-lang-el="en">Mandarin (basic)</span></li>
+            <li><span data-lang-el="pt">Japonês (básico)</span><span data-lang-el="en">Japanese (basic)</span></li>
+          </ul>
         </div>
       </div>
-      <figure class="campus-figure">
-        <img src="assets/eesc-portal.jpg" alt="Portal vermelho na Escola de Engenharia de São Carlos (EESC), USP" loading="lazy">
-        <figcaption>
-          <span data-lang-el="pt">Portal da EESC, USP São Carlos</span>
-          <span data-lang-el="en">EESC gateway, USP São Carlos campus</span>
-        </figcaption>
-      </figure>
+    </section>
+
+    <section aria-labelledby="projetos-h">
+      <h2 id="projetos-h"><span data-lang-el="pt">Projetos Acadêmicos</span><span data-lang-el="en">Academic Projects</span></h2>
+      <div class="exp-list">
+
+        <article class="exp-item">
+          <details class="accordion">
+            <summary class="accordion-toggle">
+              <div class="accordion-head">
+                <p class="exp-meta"><span>Gatos do C2</span><span>Jul 2022 &ndash; <span data-lang-el="pt">presente</span><span data-lang-el="en">present</span></span></p>
+                <p class="exp-role">
+                  <span><span data-lang-el="pt">Membro Fundador e Voluntário</span><span data-lang-el="en">Founding Member &amp; Volunteer</span></span>
+                  <span class="place"><span data-lang-el="pt">São Carlos, SP</span><span data-lang-el="en">São Carlos, SP</span></span>
+                </p>
+              </div>
+              <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </summary>
+            <div class="accordion-body">
+              <div data-lang-el="pt"><ul class="exp-bullets">
+                <li>Um dos alunos que, em meados de 2022, oficializou o grupo como ação de extensão dedicada ao cuidado e controle populacional da fauna sinantrópica na USP. Iniciou as ações e a presença online do grupo (<a href="https://www.instagram.com/gatosdoc2/" target="_blank" rel="noopener">@gatosdoc2</a>).</li>
+                <li>Gerencia operações logísticas, rastreamento de dados populacionais e encaminhamento veterinário para o método CED, em parceria com a ONG <a href="https://www.instagram.com/amigos_salvando_amigos/" target="_blank" rel="noopener">Amigos Salvando Amigos</a> e protetores da cidade.</li>
+                <li>Palestras de educação ambiental no <a href="https://saocarlos.usp.br/palestra-conscientiza-alunos-do-projeto-pequeno-cidadao-sobre-respeito-e-bem-estar-animal/" target="_blank" rel="noopener">Projeto Pequeno Cidadão</a>.</li>
+              </ul></div>
+              <div data-lang-el="en"><ul class="exp-bullets">
+                <li>One of the students who, in mid-2022, formalized the group as a university extension initiative dedicated to the care and population control of synanthropic fauna at USP. Launched its activities and online presence (<a href="https://www.instagram.com/gatosdoc2/" target="_blank" rel="noopener">@gatosdoc2</a>).</li>
+                <li>Manages logistics, population-tracking data, and veterinary referrals for the TNR method, in partnership with the NGO <a href="https://www.instagram.com/amigos_salvando_amigos/" target="_blank" rel="noopener">Amigos Salvando Amigos</a> and independent local caregivers.</li>
+                <li>Delivered environmental-education talks through the <a href="https://saocarlos.usp.br/palestra-conscientiza-alunos-do-projeto-pequeno-cidadao-sobre-respeito-e-bem-estar-animal/" target="_blank" rel="noopener">Projeto Pequeno Cidadão</a> outreach program.</li>
+              </ul></div>
+            </div>
+          </details>
+        </article>
+
+        <article class="exp-item">
+          <details class="accordion">
+            <summary class="accordion-toggle">
+              <div class="accordion-head">
+                <p class="exp-meta"><span>PUB (<span data-lang-el="pt">Projeto Memória Virtual</span><span data-lang-el="en">Virtual Memory Project</span>)</span><span>Sep 2020 &ndash; Sep 2021</span></p>
+                <p class="exp-role">
+                  <span><span data-lang-el="pt">Aluno de Iniciação Científica</span><span data-lang-el="en">Undergraduate Research Assistant</span></span>
+                  <span class="place"><span data-lang-el="pt">São Carlos, SP</span><span data-lang-el="en">São Carlos, SP</span></span>
+                </p>
+              </div>
+              <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </summary>
+            <div class="accordion-body">
+              <div data-lang-el="pt"><ul class="exp-bullets">
+                <li>Atuou na engenharia e no desenvolvimento de um <a href="https://mff.icmc.usp.br/historia" target="_blank" rel="noopener">sistema web gratuito</a>, com o objetivo de centralizar e disponibilizar dados sobre bens patrimoniais de acervos históricos brasileiros. Orientadora: Profa. Dra. Elisa Yumi Nakagawa.</li>
+              </ul></div>
+              <div data-lang-el="en"><ul class="exp-bullets">
+                <li>Worked on the engineering and development of a <a href="https://mff.icmc.usp.br/historia" target="_blank" rel="noopener">free web system</a> aimed at centralizing data on heritage assets from Brazilian historical collections. Advisor: Prof. Dr. Elisa Yumi Nakagawa.</li>
+              </ul></div>
+            </div>
+          </details>
+        </article>
+
+        <article class="exp-item">
+          <details class="accordion">
+            <summary class="accordion-toggle">
+              <div class="accordion-head">
+                <p class="exp-meta"><span>Projeto Semente</span><span>Apr 2020 &ndash; Dec 2020</span></p>
+                <p class="exp-role">
+                  <span><span data-lang-el="pt">Membro da Equipe de Comunicação</span><span data-lang-el="en">Communications Team Member</span></span>
+                  <span class="place"><span data-lang-el="pt">São Carlos, SP</span><span data-lang-el="en">São Carlos, SP</span></span>
+                </p>
+              </div>
+              <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </summary>
+            <div class="accordion-body">
+              <div data-lang-el="pt"><ul class="exp-bullets">
+                <li>Integrou a equipe de comunicação e redes sociais da <a href="https://prefeitura.sc.usp.br/projeto-traz-criancas-e-adolescentes-para-a-vida-universitaria/" target="_blank" rel="noopener">iniciativa universitária</a> voltada à democratização do ensino de tecnologia para jovens em situação de vulnerabilidade social.</li>
+              </ul></div>
+              <div data-lang-el="en"><ul class="exp-bullets">
+                <li>Joined the communications and social media team of a <a href="https://prefeitura.sc.usp.br/projeto-traz-criancas-e-adolescentes-para-a-vida-universitaria/" target="_blank" rel="noopener">university initiative</a> focused on broadening access to technology education for young people in socially vulnerable situations.</li>
+              </ul></div>
+            </div>
+          </details>
+        </article>
+
+      </div>
+    </section>
+
+    <section aria-labelledby="lideranca-h">
+      <h2 id="lideranca-h"><span data-lang-el="pt">Liderança &amp; Colegiados</span><span data-lang-el="en">Leadership &amp; Committees</span></h2>
+      <div class="exp-list">
+
+        <article class="exp-item">
+          <details class="accordion">
+            <summary class="accordion-toggle">
+              <div class="accordion-head">
+                <p class="exp-meta"><span data-lang-el="pt">Representação Institucional na USP</span><span data-lang-el="en">Institutional Representation at USP</span><span>2019 &ndash; 2023</span></p>
+                <p class="exp-role">
+                  <span data-lang-el="pt">Representante discente, 14 mandatos</span><span data-lang-el="en">Elected student representative, 14 terms</span>
+                </p>
+              </div>
+              <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </summary>
+            <div class="accordion-body">
+              <div data-lang-el="pt"><ul class="exp-bullets">
+                <li>Eleito em 14 mandatos, entre titular e suplente, em seis colegiados e comissões da EESC e do ICMC (Congregação, Comissão de Graduação, Comissão de Coordenação de Curso, Comissão de Planejamento Acadêmico do Campus, Comissão de Cooperação Nacional e Internacional, Comissão de Biblioteca), com direito a voto sobre regras de curso, orçamento e infraestrutura.</li>
+              </ul></div>
+              <div data-lang-el="en"><ul class="exp-bullets">
+                <li>Elected for 14 terms, as both titular and alternate member, across six committees and boards of EESC and ICMC (University Council, Undergraduate Committee, Course Coordination Committee, Campus Academic Planning Committee, National and International Cooperation Committee, Library Committee), with voting power over course rules, budget, and infrastructure.</li>
+              </ul></div>
+            </div>
+          </details>
+        </article>
+
+        <article class="exp-item">
+          <details class="accordion">
+            <summary class="accordion-toggle">
+              <div class="accordion-head">
+                <p class="exp-meta"><span>SAEComp</span><span>2020 &ndash; 2022</span></p>
+                <p class="exp-role">
+                  <span data-lang-el="pt">Membro e Diretor de Eventos</span><span data-lang-el="en">Member &amp; Events Director</span>
+                </p>
+              </div>
+              <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </summary>
+            <div class="accordion-body">
+              <div data-lang-el="pt"><ul class="exp-bullets">
+                <li>Membro (jan&ndash;dez/2020); Diretor de Eventos (jan/2021&ndash;jan/2022), planejando, gerenciando e executando atividades voltadas aos estudantes; novamente membro (fev&ndash;out/2022).</li>
+              </ul></div>
+              <div data-lang-el="en"><ul class="exp-bullets">
+                <li>Member (Jan&ndash;Dec 2020); Events Director (Jan 2021&ndash;Jan 2022), planning, managing, and running student-focused activities; member again (Feb&ndash;Oct 2022).</li>
+              </ul></div>
+            </div>
+          </details>
+        </article>
+
+        <article class="exp-item">
+          <details class="accordion">
+            <summary class="accordion-toggle">
+              <div class="accordion-head">
+                <p class="exp-meta"><span data-lang-el="pt">Comitê do Cinquentenário do ICMC</span><span data-lang-el="en">ICMC 50th Anniversary Committee</span><span>2020 &ndash; 2021</span></p>
+                <p class="exp-role">
+                  <span data-lang-el="pt">Coordenador Discente do Comitê Executivo</span><span data-lang-el="en">Student Coordinator of the Executive Committee</span>
+                </p>
+              </div>
+              <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </summary>
+            <div class="accordion-body">
+              <div data-lang-el="pt"><ul class="exp-bullets">
+                <li>Representando o corpo estudantil na tomada de decisões e na estruturação das comemorações históricas de meio século do instituto.</li>
+              </ul></div>
+              <div data-lang-el="en"><ul class="exp-bullets">
+                <li>Represented the student body in decision-making and in organizing the institute's 50th-anniversary celebrations.</li>
+              </ul></div>
+            </div>
+          </details>
+        </article>
+
+        <article class="exp-item">
+          <details class="accordion">
+            <summary class="accordion-toggle">
+              <div class="accordion-head">
+                <p class="exp-meta"><span data-lang-el="pt">SEnC (Semana da Engenharia de Computação)</span><span data-lang-el="en">SEnC (Computer Engineering Week)</span></p>
+                <p class="exp-role">
+                  <span data-lang-el="pt">Colaborador na organização</span><span data-lang-el="en">Event organization contributor</span>
+                </p>
+              </div>
+              <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </summary>
+            <div class="accordion-body">
+              <div data-lang-el="pt"><ul class="exp-bullets">
+                <li>Articulou a participação de empresas em palestras, processos seletivos e ações de captação técnica junto aos estudantes, incluindo o BTG Pactual, onde atuava.</li>
+              </ul></div>
+              <div data-lang-el="en"><ul class="exp-bullets">
+                <li>Coordinated company participation in talks, recruitment processes, and technical outreach activities with students, including BTG Pactual, where he worked at the time.</li>
+              </ul></div>
+            </div>
+          </details>
+        </article>
+
+        <article class="exp-item">
+          <details class="accordion">
+            <summary class="accordion-toggle">
+              <div class="accordion-head">
+                <p class="exp-meta"><span data-lang-el="pt">Olimpíadas e competições científicas</span><span data-lang-el="en">Scientific olympiads &amp; competitions</span></p>
+                <p class="exp-role">
+                  <span data-lang-el="pt">Conquistas acadêmicas</span><span data-lang-el="en">Academic achievements</span>
+                </p>
+              </div>
+              <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </summary>
+            <div class="accordion-body">
+              <div data-lang-el="pt"><ul class="exp-bullets">
+                <li>Menção Honrosa na Olimpíada Brasileira de Física (OBF), 3ª série (2015).</li>
+                <li>Certificado de participação na International Mathematics Competition for University Students (IMC), integrando a equipe da USP em 2020 e 2021 (67º lugar global em 2021).</li>
+              </ul></div>
+              <div data-lang-el="en"><ul class="exp-bullets">
+                <li>Honorable Mention, Brazilian Physics Olympiad (OBF), 3rd year (2015).</li>
+                <li>Participation certificate, International Mathematics Competition for University Students (IMC), as part of the USP team in 2020 and 2021 (team placed 67th globally in 2021).</li>
+              </ul></div>
+            </div>
+          </details>
+        </article>
+
+      </div>
     </section>
 
     <section aria-labelledby="destaques-h">
@@ -252,11 +934,17 @@
           <a href="https://github.com/felipiadenildo/felinet" target="_blank" rel="noopener"><span data-lang-el="pt">Ver repositório</span><span data-lang-el="en">View repository</span> &#8599;</a>
         </div>
         <div class="card">
-          <p class="kicker"><span data-lang-el="pt">Projeto</span><span data-lang-el="en">Project</span></p>
-          <h3>CatalIza-gcms</h3>
-          <div data-lang-el="pt"><p>Ferramenta para facilitar o cálculo de dados de amostras de GCMS (cromatografia gasosa acoplada à espectrometria de massa).</p></div>
-          <div data-lang-el="en"><p>A tool that simplifies calculations for GCMS sample data (gas chromatography&ndash;mass spectrometry).</p></div>
-          <a href="https://github.com/felipiadenildo/CatalIza-gcms" target="_blank" rel="noopener"><span data-lang-el="pt">Ver repositório</span><span data-lang-el="en">View repository</span> &#8599;</a>
+          <p class="kicker"><span data-lang-el="pt">Parceria de pesquisa</span><span data-lang-el="en">Research partnership</span></p>
+          <h3>CatalIza</h3>
+          <div data-lang-el="pt"><p>Conjunto de ferramentas desenvolvido em parceria com a pesquisadora Dra. Izadora Rhaynna Santos de Menezes: plataforma de automação de dados de laboratório (<a href="https://github.com/felipiadenildo/CatalIza" target="_blank" rel="noopener">CatalIza</a>), analisador de amostras de GCMS (<a href="https://github.com/felipiadenildo/cataliza-gcms-analyzer" target="_blank" rel="noopener">cataliza-gcms-analyzer</a>) e o site pessoal/acadêmico dela (<a href="https://github.com/felipiadenildo/site-izadora" target="_blank" rel="noopener">site-izadora</a>).</p></div>
+          <div data-lang-el="en"><p>A set of tools built in partnership with researcher Dr. Izadora Rhaynna Santos de Menezes: a lab data automation platform (<a href="https://github.com/felipiadenildo/CatalIza" target="_blank" rel="noopener">CatalIza</a>), a GCMS sample analyzer (<a href="https://github.com/felipiadenildo/cataliza-gcms-analyzer" target="_blank" rel="noopener">cataliza-gcms-analyzer</a>), and her personal/academic website (<a href="https://github.com/felipiadenildo/site-izadora" target="_blank" rel="noopener">site-izadora</a>).</p></div>
+        </div>
+        <div class="card">
+          <p class="kicker"><span data-lang-el="pt">Projeto para cliente</span><span data-lang-el="en">Client project</span></p>
+          <h3><span data-lang-el="pt">Site institucional de advocacia</span><span data-lang-el="en">Law firm website</span></h3>
+          <div data-lang-el="pt"><p>Site institucional desenvolvido para uma advogada (Juliana).</p></div>
+          <div data-lang-el="en"><p>Institutional website built for a lawyer (Juliana).</p></div>
+          <a href="https://github.com/felipiadenildo/site-advogada-juliana" target="_blank" rel="noopener"><span data-lang-el="pt">Ver repositório</span><span data-lang-el="en">View repository</span> &#8599;</a>
         </div>
         <div class="card">
           <p class="kicker"><span data-lang-el="pt">Voluntariado</span><span data-lang-el="en">Volunteering</span></p>
@@ -269,34 +957,37 @@
     </section>
 
     <section aria-labelledby="cv-h">
-      <h2 id="cv-h"><span data-lang-el="pt">Currículo</span><span data-lang-el="en">Résumé</span></h2>
+      <h2 id="cv-h"><span data-lang-el="pt">Currículo &amp; Carta</span><span data-lang-el="en">Résumé &amp; Cover Letter</span></h2>
       <div class="cv-options">
         <div class="cv-card">
-          <h3><span data-lang-el="pt">Completo</span><span data-lang-el="en">Complete</span></h3>
-          <div data-lang-el="pt"><p>Inclui a experiência com monitoria e aulas particulares, mostrando uma base ampla em exatas, lógica e ensino.</p></div>
-          <div data-lang-el="en"><p>Includes tutoring and teaching experience, showing a broader foundation in STEM, logic, and teaching.</p></div>
-          <a class="download" data-pdf-pt="cv/felipi-sousa-cv-pt.pdf" data-pdf-en="cv/felipi-sousa-cv-en.pdf" href="cv/felipi-sousa-cv-pt.pdf" download>
+          <h3><span data-lang-el="pt">Currículo</span><span data-lang-el="en">Résumé</span></h3>
+          <div data-lang-el="pt"><p>Versão única, com português e inglês no mesmo PDF.</p></div>
+          <div data-lang-el="en"><p>Single PDF with both Portuguese and English.</p></div>
+          <a class="download" href="cv/felipi-sousa-cv-bilingual.pdf" download>
             <span data-lang-el="pt">Baixar PDF</span><span data-lang-el="en">Download PDF</span> &#8595;
           </a>
         </div>
         <div class="cv-card">
-          <h3><span data-lang-el="pt">Foco em TI</span><span data-lang-el="en">Tech-focused</span></h3>
-          <div data-lang-el="pt"><p>Versão mais direta, sem a seção de monitoria, pensada para vagas puramente de desenvolvimento/TI sênior.</p></div>
-          <div data-lang-el="en"><p>A leaner version without the tutoring section, geared toward purely senior software/IT roles.</p></div>
-          <a class="download" data-pdf-pt="cv/felipi-sousa-cv-pt-tech.pdf" data-pdf-en="cv/felipi-sousa-cv-en-tech.pdf" href="cv/felipi-sousa-cv-pt-tech.pdf" download>
+          <h3><span data-lang-el="pt">Carta de apresentação</span><span data-lang-el="en">Cover letter</span></h3>
+          <div data-lang-el="pt"><p>Versão geral, também com português e inglês no mesmo PDF.</p></div>
+          <div data-lang-el="en"><p>General version, also with both languages in the same PDF.</p></div>
+          <a class="download" href="cv/felipi-sousa-carta-bilingual.pdf" download>
             <span data-lang-el="pt">Baixar PDF</span><span data-lang-el="en">Download PDF</span> &#8595;
           </a>
         </div>
       </div>
     </section>
 
-    <div class="notice">
-      <span class="dot" aria-hidden="true"></span>
-      <p>
-        <span data-lang-el="pt">Este site está no começo: texto, projetos e páginas novas (como "Minha História" e "Listas") ainda estão sendo escritos e vão crescer aos poucos.</span>
-        <span data-lang-el="en">This site is just getting started. Text, projects, and new pages (like "My Story" and "Lists") are still being written and will keep growing over time.</span>
-      </p>
-    </div>
+    <section aria-labelledby="contato-h" class="contact-section">
+      <h2 id="contato-h"><span data-lang-el="pt">Contato</span><span data-lang-el="en">Contact</span></h2>
+      <ul class="links">
+        <li><a href="https://www.linkedin.com/in/felipiadenildo/" target="_blank" rel="noopener">LinkedIn <span class="arrow">&#8599;</span></a></li>
+        <li><a href="https://github.com/felipiadenildo" target="_blank" rel="noopener">GitHub <span class="arrow">&#8599;</span></a></li>
+        <li><a href="https://www.instagram.com/felipiadenildo/" target="_blank" rel="noopener">Instagram <span class="arrow">&#8599;</span></a></li>
+        <li><a href="weixin://dl/chat?felipiadenildo" target="_blank" rel="noopener">WeChat <span class="arrow">&#8599;</span></a></li>
+        <li><a href="mailto:felipiadenildo@gmail.com">Email <span class="arrow">&#8599;</span></a></li>
+      </ul>
+    </section>
 
     <footer>
       <span class="status"><span data-lang-el="pt">Obrigado pela visita.</span><span data-lang-el="en">Thanks for stopping by.</span></span>
@@ -315,10 +1006,6 @@
     document.querySelectorAll('.langtoggle button').forEach(function(btn){
       btn.setAttribute('aria-pressed', btn.getAttribute('data-set') === lang ? 'true' : 'false');
     });
-    document.querySelectorAll('[data-pdf-pt]').forEach(function(a){
-      var href = lang === 'en' ? a.getAttribute('data-pdf-en') : a.getAttribute('data-pdf-pt');
-      a.setAttribute('href', href);
-    });
     try{ localStorage.setItem(STORAGE_KEY, lang); }catch(e){}
   }
   document.querySelectorAll('.langtoggle button').forEach(function(btn){
@@ -326,10 +1013,56 @@
   });
   var saved = null;
   try{ saved = localStorage.getItem(STORAGE_KEY); }catch(e){}
-  applyLang(saved === 'en' ? 'en' : 'pt');
+  applyLang(saved === 'pt' ? 'pt' : 'en');
+})();
+</script>
+<script>
+(function(){
+  var toggle = document.getElementById('theme-toggle');
+  var THEME_KEY = 'felipi-site-theme';
+  var root = document.documentElement;
+  function applyTheme(theme){
+    if(theme === 'dark' || theme === 'light'){
+      root.setAttribute('data-theme', theme);
+      try{ localStorage.setItem(THEME_KEY, theme); }catch(e){}
+    }
+  }
+  var saved = null;
+  try{ saved = localStorage.getItem(THEME_KEY); }catch(e){}
+  if(saved){ applyTheme(saved); }
+  if(toggle){
+    toggle.addEventListener('click', function(){
+      var current = root.getAttribute('data-theme');
+      if(!current){
+        current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      applyTheme(current === 'dark' ? 'light' : 'dark');
+    });
+  }
 })();
 </script>
 <script src="content/easter-egg.js"></script>
+<script>
+// Gentle reveal-on-scroll. No-ops (sections stay visible) if IntersectionObserver
+// is unsupported, since the CSS only hides sections under prefers-reduced-motion: no-preference.
+(function(){
+  var sections = document.querySelectorAll('section');
+  if(!('IntersectionObserver' in window)){
+    sections.forEach(function(s){ s.classList.add('in-view'); });
+    return;
+  }
+  document.documentElement.classList.add('js-reveal');
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('in-view');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  sections.forEach(function(s){ io.observe(s); });
+})();
+</script>
 <script>
 // Smart sticky nav: hides on scroll down, reappears on scroll up.
 (function(){
