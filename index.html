@@ -337,12 +337,13 @@
   .exp-sub{ margin: 0.5rem 0 0 0; padding-left: 1.15em; }
   .exp-sub li{ font-family: "IBM Plex Sans", sans-serif; font-size: 0.83rem; color: var(--ink-soft); margin: 0 0 0.3rem; }
 
-  /* skills as a numbered index (table-of-contents feel) with one item per
-     line — the tools used daily get a slightly darker ink, no bold, no
-     borders, no reveal-on-click, just a quieter typographic cue. */
+  /* skills as a numbered index (table-of-contents feel): category label with
+     a running number, values flowing as text separated by a middle dot (the
+     same separator the section-nav already uses) — tools used daily get a
+     slightly darker ink, no bold, no borders, no boxes. */
   .skills-list{
     display: grid; grid-template-columns: minmax(9.5rem, max-content) 1fr;
-    column-gap: 1.4rem; row-gap: 1.1rem; margin: 1.1rem 0 0;
+    column-gap: 1.4rem; row-gap: 0.9rem; margin: 1.1rem 0 0;
     counter-reset: skillcat;
   }
   .skills-list dt{
@@ -353,15 +354,14 @@
   .skills-list dt::before{
     content: counter(skillcat, decimal-leading-zero) " \00b7 ";
   }
-  .skills-list dd{ margin: 0; }
-  .skills-list dd ul{ list-style: none; margin: 0; padding: 0; }
-  .skills-list dd li{
+  .skills-list dd{
     font-family: "IBM Plex Sans", sans-serif; font-size: 0.86rem; color: var(--ink-soft);
-    line-height: 1.6;
+    line-height: 1.85; margin: 0;
   }
+  .skills-list dd .sep{ color: var(--ink-faint); padding: 0 0.45em; }
   .skill-core{ color: var(--ink); }
   @media (max-width: 30rem){
-    .skills-list{ grid-template-columns: 1fr; row-gap: 0.5rem; }
+    .skills-list{ grid-template-columns: 1fr; row-gap: 0.4rem; }
     .skills-list dt{ padding-top: 0.9rem; border-top: 1px solid var(--line); }
     .skills-list dt:first-child{ border-top: none; padding-top: 0; }
   }
@@ -717,61 +717,24 @@
       <h2 id="competencias-h"><span data-lang-el="pt">Competências</span><span data-lang-el="en">Skills</span></h2>
       <dl class="skills-list">
         <dt><span data-lang-el="pt">Programação</span><span data-lang-el="en">Programming</span></dt>
-        <dd><ul>
-          <li class="skill-core">Python</li>
-          <li>C/C++</li>
-          <li class="skill-core">SQL</li>
-          <li class="skill-core">JavaScript</li>
-          <li class="skill-core">Bash/Shell</li>
-          <li>Java</li>
-          <li>VBA</li>
-        </ul></dd>
+        <dd><span class="skill-core">Python</span><span class="sep">&middot;</span>C/C++<span class="sep">&middot;</span><span class="skill-core">SQL</span><span class="sep">&middot;</span><span class="skill-core">JavaScript</span><span class="sep">&middot;</span><span class="skill-core">Bash/Shell</span><span class="sep">&middot;</span>Java<span class="sep">&middot;</span>VBA</dd>
 
         <dt><span data-lang-el="pt">IA &amp; Visão Computacional</span><span data-lang-el="en">AI &amp; Computer Vision</span></dt>
-        <dd><ul>
-          <li>Edge AI</li>
-          <li class="skill-core">YOLOv11</li>
-          <li class="skill-core">Object Detection</li>
-          <li class="skill-core">PyTorch</li>
-          <li class="skill-core">OpenCV</li>
-          <li>Data Pipelines</li>
-        </ul></dd>
+        <dd>Edge AI<span class="sep">&middot;</span><span class="skill-core">YOLOv11</span><span class="sep">&middot;</span><span class="skill-core">Object Detection</span><span class="sep">&middot;</span><span class="skill-core">PyTorch</span><span class="sep">&middot;</span><span class="skill-core">OpenCV</span><span class="sep">&middot;</span>Data Pipelines</dd>
 
         <dt><span data-lang-el="pt">Embarcados &amp; Hardware</span><span data-lang-el="en">Embedded &amp; Hardware</span></dt>
-        <dd><ul>
-          <li>IoT Systems</li>
-          <li>Microcontrollers</li>
-          <li>Embedded Linux</li>
-          <li>Digital Design</li>
-        </ul></dd>
+        <dd>IoT Systems<span class="sep">&middot;</span>Microcontrollers<span class="sep">&middot;</span>Embedded Linux<span class="sep">&middot;</span>Digital Design</dd>
 
         <dt><span data-lang-el="pt">Web &amp; Full-Stack</span><span data-lang-el="en">Web &amp; Full-Stack</span></dt>
-        <dd><ul>
-          <li class="skill-core">React</li>
-          <li>HTML/CSS</li>
-          <li>Node.js</li>
-          <li class="skill-core">RESTful APIs</li>
-          <li class="skill-core">System Integration</li>
-        </ul></dd>
+        <dd><span class="skill-core">React</span><span class="sep">&middot;</span>HTML/CSS<span class="sep">&middot;</span>Node.js<span class="sep">&middot;</span><span class="skill-core">RESTful APIs</span><span class="sep">&middot;</span><span class="skill-core">System Integration</span></dd>
 
         <dt><span data-lang-el="pt">Cloud &amp; Ferramentas</span><span data-lang-el="en">Cloud &amp; Tools</span></dt>
-        <dd><ul>
-          <li class="skill-core">AWS (EC2, S3, RDS, Lambda)</li>
-          <li class="skill-core">Power BI</li>
-          <li>Docker</li>
-          <li class="skill-core">Git</li>
-          <li class="skill-core">Linux</li>
-          <li>LaTeX</li>
-        </ul></dd>
+        <dd><span class="skill-core">AWS (EC2, S3, RDS, Lambda)</span><span class="sep">&middot;</span><span class="skill-core">Power BI</span><span class="sep">&middot;</span>Docker<span class="sep">&middot;</span><span class="skill-core">Git</span><span class="sep">&middot;</span><span class="skill-core">Linux</span><span class="sep">&middot;</span>LaTeX</dd>
 
         <dt><span data-lang-el="pt">Idiomas</span><span data-lang-el="en">Languages</span></dt>
-        <dd><ul>
-          <li><span data-lang-el="pt">Português (nativo)</span><span data-lang-el="en">Portuguese (native)</span></li>
-          <li><span data-lang-el="pt">Inglês (fluente)</span><span data-lang-el="en">English (fluent)</span></li>
-          <li><span data-lang-el="pt">Espanhol (intermediário/avançado)</span><span data-lang-el="en">Spanish (intermediate/advanced)</span></li>
-          <li><span data-lang-el="pt">Mandarim (básico)</span><span data-lang-el="en">Mandarin (basic)</span></li>
-          <li><span data-lang-el="pt">Japonês (básico)</span><span data-lang-el="en">Japanese (basic)</span></li>
-        </ul></dd>
+        <dd>
+          <span data-lang-el="pt">Português (nativo)<span class="sep">&middot;</span>Inglês (fluente)<span class="sep">&middot;</span>Espanhol (intermediário/avançado)<span class="sep">&middot;</span>Mandarim (básico)<span class="sep">&middot;</span>Japonês (básico)</span><span data-lang-el="en">Portuguese (native)<span class="sep">&middot;</span>English (fluent)<span class="sep">&middot;</span>Spanish (intermediate/advanced)<span class="sep">&middot;</span>Mandarin (basic)<span class="sep">&middot;</span>Japanese (basic)</span>
+        </dd>
       </dl>
     </section>
 
