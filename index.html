@@ -297,18 +297,35 @@
   .accordion-body{ padding-top: 0.8rem; }
   .accordion-body .exp-bullets{ margin-top: 0; }
 
+  /* standalone "read more" affordance (no header row to click, just prose) —
+     a plain +/× circle reads as "expand" without needing translated text */
+  .readmore-toggle{
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 1.7rem; height: 1.7rem; margin-top: 0.7rem;
+    border: 1px solid var(--line); border-radius: 50%;
+    color: var(--ink-soft); background: none;
+  }
+  .readmore-toggle:hover{ color: var(--ink); border-color: var(--ink-faint); }
+  .readmore-toggle .plus-icon{
+    width: 12px; height: 6px; stroke: currentColor; stroke-width: 2; fill: none;
+  }
+  @media (prefers-reduced-motion: no-preference){
+    .readmore-toggle .plus-icon{ transition: transform 0.25s ease; }
+  }
+  .accordion[open] > .readmore-toggle .plus-icon{ transform: rotate(45deg); }
+
   /* BTG grouped under one company header, with a small timeline for the 3 roles */
   .corp-timeline{ position: relative; padding-left: 1.6rem; margin-top: 1.1rem; }
   .corp-timeline::before{
     content: ""; position: absolute; left: 0.3rem; top: 0.3rem; bottom: 0.3rem;
-    width: 2px; background: var(--line);
+    width: 2px; background: var(--line); transform: translateX(-50%);
   }
   .corp-entry{ position: relative; padding-bottom: 1.6rem; }
   .corp-entry:last-child{ padding-bottom: 0; }
   .corp-entry::before{
-    content: ""; position: absolute; left: -1.35rem; top: 0.45rem;
-    width: 0.35rem; height: 0.35rem; border-radius: 50%;
-    background: var(--line);
+    content: ""; position: absolute; left: calc(0.3rem - 1.6rem); top: 0.5rem;
+    width: 0.4rem; height: 0.4rem; border-radius: 50%;
+    background: var(--line); transform: translateX(-50%);
   }
 
   /* tech tags at the end of an expanded entry */
@@ -327,17 +344,25 @@
   /* skills — no box-in-box: a thin top rule per category (same separator
      language as section headers), tags float free with generous white space
      instead of being nested inside a bordered card. */
-  .skills-groups{ columns: 2 18rem; column-gap: 2rem; }
-  .skills-group{ break-inside: avoid; margin: 0 0 1.3rem; }
-  .skills-group .cat{
-    font-family: "IBM Plex Mono", monospace; font-size: 0.7rem; letter-spacing: 0.06em;
-    text-transform: uppercase; color: var(--ink-faint); margin: 0 0 0.6rem;
-    border-top: 1px solid var(--line); padding-top: 0.6rem;
+  /* skills as a plain label/value list — the earlier pill-grid read as
+     "boxes inside boxes"; this borrows the printed-résumé convention of a
+     mono kicker label next to a flowing comma list, no borders at all. */
+  .skills-list{
+    display: grid; grid-template-columns: minmax(9.5rem, max-content) 1fr;
+    column-gap: 1.4rem; row-gap: 0.95rem; margin: 1.1rem 0 0;
   }
-  .skill-tags{ display: flex; flex-wrap: wrap; gap: 0.45rem; padding: 0; margin: 0; list-style: none; }
-  .skill-tags li{
-    font-family: "IBM Plex Mono", monospace; font-size: 0.76rem; color: var(--ink-soft);
-    border: 1px solid var(--line); border-radius: 3px; padding: 0.28rem 0.6rem; background: var(--paper-raised);
+  .skills-list dt{
+    font-family: "IBM Plex Mono", monospace; font-size: 0.7rem; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--ink-faint); padding-top: 0.2rem; margin: 0;
+  }
+  .skills-list dd{
+    font-family: "IBM Plex Sans", sans-serif; font-size: 0.86rem; color: var(--ink-soft);
+    line-height: 1.6; margin: 0;
+  }
+  @media (max-width: 30rem){
+    .skills-list{ grid-template-columns: 1fr; row-gap: 0.3rem; }
+    .skills-list dt{ padding-top: 0.9rem; border-top: 1px solid var(--line); }
+    .skills-list dt:first-child{ border-top: none; padding-top: 0; }
   }
 
   .cv-options{ display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
@@ -438,9 +463,8 @@
         </div>
 
         <details class="accordion">
-          <summary class="accordion-toggle">
-            <span data-lang-el="pt">Ler trajetória completa</span><span data-lang-el="en">Read full background</span>
-            <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          <summary class="accordion-toggle readmore-toggle" aria-label="Continuar lendo / Continue reading">
+            <svg class="plus-icon" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
           </summary>
           <div class="accordion-body">
             <div data-lang-el="pt">
@@ -662,7 +686,7 @@
               <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </summary>
             <div class="accordion-body">
-              <p class="exp-dept"><span data-lang-el="pt">Período cursado.</span><span data-lang-el="en">Coursework, not completed.</span></p>
+              <p class="exp-dept"><span data-lang-el="pt">Período cursado.</span><span data-lang-el="en">Coursework attended.</span></p>
             </div>
           </details>
         </article>
@@ -680,7 +704,7 @@
               <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </summary>
             <div class="accordion-body">
-              <p class="exp-dept"><span data-lang-el="pt">Período cursado.</span><span data-lang-el="en">Coursework, not completed.</span></p>
+              <p class="exp-dept"><span data-lang-el="pt">Período cursado.</span><span data-lang-el="en">Coursework attended.</span></p>
             </div>
           </details>
         </article>
@@ -690,38 +714,27 @@
 
     <section aria-labelledby="competencias-h">
       <h2 id="competencias-h"><span data-lang-el="pt">Competências</span><span data-lang-el="en">Skills</span></h2>
-      <div class="skills-groups">
-        <div class="skills-group">
-          <p class="cat"><span data-lang-el="pt">Programação</span><span data-lang-el="en">Programming</span></p>
-          <ul class="skill-tags"><li>Python</li><li>C/C++</li><li>SQL</li><li>JavaScript</li><li>Bash/Shell</li><li>Java</li><li>VBA</li></ul>
-        </div>
-        <div class="skills-group">
-          <p class="cat"><span data-lang-el="pt">IA &amp; Visão Computacional</span><span data-lang-el="en">AI &amp; Computer Vision</span></p>
-          <ul class="skill-tags"><li>Edge AI</li><li>YOLOv11</li><li>Object Detection</li><li>PyTorch</li><li>OpenCV</li><li>Data Pipelines</li></ul>
-        </div>
-        <div class="skills-group">
-          <p class="cat"><span data-lang-el="pt">Embarcados &amp; Hardware</span><span data-lang-el="en">Embedded &amp; Hardware</span></p>
-          <ul class="skill-tags"><li>IoT Systems</li><li>Microcontrollers</li><li>Embedded Linux</li><li>Digital Design</li></ul>
-        </div>
-        <div class="skills-group">
-          <p class="cat"><span data-lang-el="pt">Web &amp; Full-Stack</span><span data-lang-el="en">Web &amp; Full-Stack</span></p>
-          <ul class="skill-tags"><li>React</li><li>HTML/CSS</li><li>Node.js</li><li>RESTful APIs</li><li>System Integration</li></ul>
-        </div>
-        <div class="skills-group">
-          <p class="cat"><span data-lang-el="pt">Cloud &amp; Ferramentas</span><span data-lang-el="en">Cloud &amp; Tools</span></p>
-          <ul class="skill-tags"><li>AWS (EC2, S3, RDS, Lambda)</li><li>Power BI</li><li>Docker</li><li>Git</li><li>Linux</li><li>LaTeX</li></ul>
-        </div>
-        <div class="skills-group">
-          <p class="cat"><span data-lang-el="pt">Idiomas</span><span data-lang-el="en">Languages</span></p>
-          <ul class="skill-tags">
-            <li><span data-lang-el="pt">Português (nativo)</span><span data-lang-el="en">Portuguese (native)</span></li>
-            <li><span data-lang-el="pt">Inglês (fluente)</span><span data-lang-el="en">English (fluent)</span></li>
-            <li><span data-lang-el="pt">Espanhol (intermediário/avançado)</span><span data-lang-el="en">Spanish (intermediate/advanced)</span></li>
-            <li><span data-lang-el="pt">Mandarim (básico)</span><span data-lang-el="en">Mandarin (basic)</span></li>
-            <li><span data-lang-el="pt">Japonês (básico)</span><span data-lang-el="en">Japanese (basic)</span></li>
-          </ul>
-        </div>
-      </div>
+      <dl class="skills-list">
+        <dt><span data-lang-el="pt">Programação</span><span data-lang-el="en">Programming</span></dt>
+        <dd>Python, C/C++, SQL, JavaScript, Bash/Shell, Java, VBA</dd>
+
+        <dt><span data-lang-el="pt">IA &amp; Visão Computacional</span><span data-lang-el="en">AI &amp; Computer Vision</span></dt>
+        <dd>Edge AI, YOLOv11, Object Detection, PyTorch, OpenCV, Data Pipelines</dd>
+
+        <dt><span data-lang-el="pt">Embarcados &amp; Hardware</span><span data-lang-el="en">Embedded &amp; Hardware</span></dt>
+        <dd>IoT Systems, Microcontrollers, Embedded Linux, Digital Design</dd>
+
+        <dt><span data-lang-el="pt">Web &amp; Full-Stack</span><span data-lang-el="en">Web &amp; Full-Stack</span></dt>
+        <dd>React, HTML/CSS, Node.js, RESTful APIs, System Integration</dd>
+
+        <dt><span data-lang-el="pt">Cloud &amp; Ferramentas</span><span data-lang-el="en">Cloud &amp; Tools</span></dt>
+        <dd>AWS (EC2, S3, RDS, Lambda), Power BI, Docker, Git, Linux, LaTeX</dd>
+
+        <dt><span data-lang-el="pt">Idiomas</span><span data-lang-el="en">Languages</span></dt>
+        <dd>
+          <span data-lang-el="pt">Português (nativo), Inglês (fluente), Espanhol (intermediário/avançado), Mandarim (básico), Japonês (básico)</span><span data-lang-el="en">Portuguese (native), English (fluent), Spanish (intermediate/advanced), Mandarin (basic), Japanese (basic)</span>
+        </dd>
+      </dl>
     </section>
 
     <section aria-labelledby="projetos-h">
@@ -878,7 +891,7 @@
           <details class="accordion">
             <summary class="accordion-toggle">
               <div class="accordion-head">
-                <p class="exp-meta"><span data-lang-el="pt">SEnC (Semana da Engenharia de Computação)</span><span data-lang-el="en">SEnC (Computer Engineering Week)</span></p>
+                <p class="exp-meta"><span data-lang-el="pt">SEnC (Semana da Engenharia de Computação)</span><span data-lang-el="en">SEnC (Computer Engineering Week)</span><span>2023</span></p>
                 <p class="exp-role">
                   <span data-lang-el="pt">Colaborador na organização</span><span data-lang-el="en">Event organization contributor</span>
                 </p>
