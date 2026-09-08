@@ -296,7 +296,8 @@
      a plain +/× circle reads as "expand" without needing translated text */
   .readmore-toggle{
     display: inline-flex; align-items: center; justify-content: center;
-    width: 1.7rem; height: 1.7rem; margin-top: 0.7rem;
+    float: right; clear: right;
+    width: 1.7rem; height: 1.7rem; margin: 0.2rem 0 0.6rem 1rem;
     border: 1px solid var(--line); border-radius: 50%;
     color: var(--ink-soft); background: none;
   }
@@ -336,23 +337,31 @@
   .exp-sub{ margin: 0.5rem 0 0 0; padding-left: 1.15em; }
   .exp-sub li{ font-family: "IBM Plex Sans", sans-serif; font-size: 0.83rem; color: var(--ink-soft); margin: 0 0 0.3rem; }
 
-  /* skills as a plain label/value list — the earlier pill-grid read as
-     "boxes inside boxes"; this borrows the printed-résumé convention of a
-     mono kicker label next to a flowing comma list, no borders at all. */
+  /* skills as a numbered index (table-of-contents feel) with one item per
+     line — the tools used daily get a slightly darker ink, no bold, no
+     borders, no reveal-on-click, just a quieter typographic cue. */
   .skills-list{
     display: grid; grid-template-columns: minmax(9.5rem, max-content) 1fr;
-    column-gap: 1.4rem; row-gap: 0.95rem; margin: 1.1rem 0 0;
+    column-gap: 1.4rem; row-gap: 1.1rem; margin: 1.1rem 0 0;
+    counter-reset: skillcat;
   }
   .skills-list dt{
+    counter-increment: skillcat;
     font-family: "IBM Plex Mono", monospace; font-size: 0.7rem; letter-spacing: 0.06em;
     text-transform: uppercase; color: var(--ink-faint); padding-top: 0.2rem; margin: 0;
   }
-  .skills-list dd{
-    font-family: "IBM Plex Sans", sans-serif; font-size: 0.86rem; color: var(--ink-soft);
-    line-height: 1.6; margin: 0;
+  .skills-list dt::before{
+    content: counter(skillcat, decimal-leading-zero) " \00b7 ";
   }
+  .skills-list dd{ margin: 0; }
+  .skills-list dd ul{ list-style: none; margin: 0; padding: 0; }
+  .skills-list dd li{
+    font-family: "IBM Plex Sans", sans-serif; font-size: 0.86rem; color: var(--ink-soft);
+    line-height: 1.6;
+  }
+  .skill-core{ color: var(--ink); }
   @media (max-width: 30rem){
-    .skills-list{ grid-template-columns: 1fr; row-gap: 0.3rem; }
+    .skills-list{ grid-template-columns: 1fr; row-gap: 0.5rem; }
     .skills-list dt{ padding-top: 0.9rem; border-top: 1px solid var(--line); }
     .skills-list dt:first-child{ border-top: none; padding-top: 0; }
   }
@@ -448,7 +457,7 @@
       <div class="prose">
         <img class="portrait" src="assets/retrato.jpg" alt="Foto de Felipi Adenildo Soares Sousa" loading="lazy">
         <div data-lang-el="pt">
-          <p>Cursei Engenharia de Computação na Universidade de São Paulo. Nos últimos anos, uni desenvolvimento de software, automação e visão computacional para resolver problemas reais: <strong>três anos</strong> automatizando processos num banco, e um trabalho de conclusão de curso aplicando visão computacional ao manejo ético de uma colônia de gatos no campus onde estudei. O que mais gosto no meu trabalho é entender um processo de ponta a ponta antes de escrever a primeira linha de código.</p>
+          <p>Cursei Engenharia de Computação na Universidade de São Paulo. Nos últimos anos, uni desenvolvimento de software, automação e visão computacional para resolver problemas reais: anos automatizando processos num banco, e um trabalho de conclusão de curso aplicando visão computacional ao manejo ético de uma colônia de gatos no campus onde estudei. O que mais gosto no meu trabalho é entender um processo de ponta a ponta antes de escrever a primeira linha de código.</p>
         </div>
         <div data-lang-el="en">
           <p>I studied Computer Engineering at the University of São Paulo. In recent years, I've combined software development, automation, and computer vision to solve real problems: <strong>three years</strong> automating processes at a bank, and an undergraduate thesis applying computer vision to the ethical management of a cat colony on the campus where I studied. What I care about most in my work is understanding a process end to end before writing the first line of code.</p>
@@ -708,24 +717,61 @@
       <h2 id="competencias-h"><span data-lang-el="pt">Competências</span><span data-lang-el="en">Skills</span></h2>
       <dl class="skills-list">
         <dt><span data-lang-el="pt">Programação</span><span data-lang-el="en">Programming</span></dt>
-        <dd>Python, C/C++, SQL, JavaScript, Bash/Shell, Java, VBA</dd>
+        <dd><ul>
+          <li class="skill-core">Python</li>
+          <li>C/C++</li>
+          <li class="skill-core">SQL</li>
+          <li class="skill-core">JavaScript</li>
+          <li class="skill-core">Bash/Shell</li>
+          <li>Java</li>
+          <li>VBA</li>
+        </ul></dd>
 
         <dt><span data-lang-el="pt">IA &amp; Visão Computacional</span><span data-lang-el="en">AI &amp; Computer Vision</span></dt>
-        <dd>Edge AI, YOLOv11, Object Detection, PyTorch, OpenCV, Data Pipelines</dd>
+        <dd><ul>
+          <li>Edge AI</li>
+          <li class="skill-core">YOLOv11</li>
+          <li class="skill-core">Object Detection</li>
+          <li class="skill-core">PyTorch</li>
+          <li class="skill-core">OpenCV</li>
+          <li>Data Pipelines</li>
+        </ul></dd>
 
         <dt><span data-lang-el="pt">Embarcados &amp; Hardware</span><span data-lang-el="en">Embedded &amp; Hardware</span></dt>
-        <dd>IoT Systems, Microcontrollers, Embedded Linux, Digital Design</dd>
+        <dd><ul>
+          <li>IoT Systems</li>
+          <li>Microcontrollers</li>
+          <li>Embedded Linux</li>
+          <li>Digital Design</li>
+        </ul></dd>
 
         <dt><span data-lang-el="pt">Web &amp; Full-Stack</span><span data-lang-el="en">Web &amp; Full-Stack</span></dt>
-        <dd>React, HTML/CSS, Node.js, RESTful APIs, System Integration</dd>
+        <dd><ul>
+          <li class="skill-core">React</li>
+          <li>HTML/CSS</li>
+          <li>Node.js</li>
+          <li class="skill-core">RESTful APIs</li>
+          <li class="skill-core">System Integration</li>
+        </ul></dd>
 
         <dt><span data-lang-el="pt">Cloud &amp; Ferramentas</span><span data-lang-el="en">Cloud &amp; Tools</span></dt>
-        <dd>AWS (EC2, S3, RDS, Lambda), Power BI, Docker, Git, Linux, LaTeX</dd>
+        <dd><ul>
+          <li class="skill-core">AWS (EC2, S3, RDS, Lambda)</li>
+          <li class="skill-core">Power BI</li>
+          <li>Docker</li>
+          <li class="skill-core">Git</li>
+          <li class="skill-core">Linux</li>
+          <li>LaTeX</li>
+        </ul></dd>
 
         <dt><span data-lang-el="pt">Idiomas</span><span data-lang-el="en">Languages</span></dt>
-        <dd>
-          <span data-lang-el="pt">Português (nativo), Inglês (fluente), Espanhol (intermediário/avançado), Mandarim (básico), Japonês (básico)</span><span data-lang-el="en">Portuguese (native), English (fluent), Spanish (intermediate/advanced), Mandarin (basic), Japanese (basic)</span>
-        </dd>
+        <dd><ul>
+          <li><span data-lang-el="pt">Português (nativo)</span><span data-lang-el="en">Portuguese (native)</span></li>
+          <li><span data-lang-el="pt">Inglês (fluente)</span><span data-lang-el="en">English (fluent)</span></li>
+          <li><span data-lang-el="pt">Espanhol (intermediário/avançado)</span><span data-lang-el="en">Spanish (intermediate/advanced)</span></li>
+          <li><span data-lang-el="pt">Mandarim (básico)</span><span data-lang-el="en">Mandarin (basic)</span></li>
+          <li><span data-lang-el="pt">Japonês (básico)</span><span data-lang-el="en">Japanese (basic)</span></li>
+        </ul></dd>
       </dl>
     </section>
 
