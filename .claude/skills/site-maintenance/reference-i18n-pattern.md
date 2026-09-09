@@ -35,7 +35,11 @@ O site guarda as duas versões do texto na mesma página, e alterna a visibilida
    - Atualiza o atributo `data-lang` na raiz
    - Atualiza `lang` (`pt-BR` ou `en`) para acessibilidade/SEO
    - Persiste a escolha em `localStorage` sob a chave `felipi-site-lang`
-   - Troca os `href` dos links de download de CV com base em `data-pdf-pt` / `data-pdf-en`
+   - Idioma padrão (sem preferência salva): inglês
+
+Os dois links de download no fim da home (CV e carta) apontam pra um PDF bilíngue
+único cada — não trocam de `href` por idioma, já que o PDF em si já tem as duas
+línguas dentro. Não existe mais o padrão antigo `data-pdf-pt`/`data-pdf-en`.
 
 ## Regra para conteúdo novo
 

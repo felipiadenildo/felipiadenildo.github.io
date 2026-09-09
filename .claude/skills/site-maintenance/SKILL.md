@@ -10,28 +10,17 @@ when_to_use: Disparar em pedidos como "atualiza meu site", "adiciona uma seção
 
 Repositório: `felipiadenildo/felipiadenildo.github.io`. HTML, CSS e JavaScript puros — sem build step, sem framework, sem bundler. Publicado direto pelo GitHub Pages a partir da branch `main`.
 
-Estrutura observada:
-
 ```
-├── index.html      # home
-├── historia.html   # "minha história"
-├── blog.html       # blog
-├── listas.html     # filmes/séries/livros/anime
+├── index.html      # home — única página na navegação, currículo e carta embutidos
+├── historia.html   # "minha história" — no ar por URL direta, sem link, noindex
+├── blog.html       # blog — idem
+├── listas.html     # filmes/séries/livros/anime — idem
 ├── assets/         # imagens
-├── content/        # JS de comportamento (ex.: content/easter-egg.js)
-└── cv/             # PDFs do currículo (4 variantes, ver seção CV)
+├── content/        # JS de comportamento das páginas antigas (render.js, easter-egg.js)
+└── cv/             # os 2 PDFs bilíngues linkados na home (CV e carta)
 ```
 
-Não há template compartilhado entre páginas — cada `.html` é um arquivo independente e completo. Isso tem uma consequência importante: **qualquer elemento repetido entre páginas (nav do topo, footer, fontes) existe duplicado em cada arquivo.** Ao alterar a navegação, um card de estilo ou qualquer coisa "global", edite todas as páginas que a contêm — não existe include/partial que propague a mudança sozinho.
-
-## Reformulação em andamento (decisão já fechada, ainda não aplicada no repo)
-
-A estrutura acima (4 páginas com nav visível, 2 variantes de CV para download) é o que está publicado hoje, mas o Felipi já fechou uma reformulação da home ainda não implementada neste repo:
-- As abas Minha História, Blog e Listas saem da navegação visível e ganham `noindex`; os arquivos continuam no ar por URL direta (GitHub Pages não tem backend para bloquear de verdade).
-- A home passa a carregar CV e carta de apresentação em prosa, dentro do próprio layout, para o recrutador ver tudo sem sair da página.
-- Downloads no fim da home ficam restritos a CV completo + carta base genérica; versões específicas por vaga não são publicadas aqui (vão para um repo privado à parte).
-
-Ao pegar uma tarefa de edição na home, verifique com o Felipi se ela já é sobre essa reformulação ou se é um ajuste pontual na estrutura antiga — não assuma qual das duas está em vigor sem checar o estado atual do arquivo e perguntar se necessário.
+Não há template compartilhado entre páginas — cada `.html` é um arquivo independente e completo. Isso tem uma consequência importante: **qualquer elemento repetido entre páginas (nav do topo, footer, fontes) existe duplicado em cada arquivo.** Ao alterar a navegação, um card de estilo ou qualquer coisa "global" que exista em mais de uma página, edite todas as que a contêm — não existe include/partial que propague a mudança sozinho.
 
 Rodar localmente, sem instalar nada:
 ```bash
@@ -48,25 +37,38 @@ O site mantém português e inglês na mesma marcação, sem builds separados. V
 
 ## Sistema de design
 
-Não introduza cores, fontes ou espaçamentos novos sem necessidade — o site usa um conjunto fechado de tokens CSS e componentes reutilizáveis. Ver [reference-design-system.md](reference-design-system.md) para a paleta completa, tipografia e classes de componente (`.card`, `.cv-card`, `.notice`, `.links a`, etc.). Sempre confira o modo escuro (`prefers-color-scheme: dark`) ao alterar cores — os tokens já têm variante dark definida em `:root`.
+Não introduza cores, fontes ou espaçamentos novos sem necessidade — o site usa um conjunto fechado de tokens CSS e componentes reutilizáveis, incluindo tema claro/escuro com toggle manual. Ver [reference-design-system.md](reference-design-system.md) para a paleta completa (nas três camadas: claro, escuro automático, escuro forçado pelo toggle), tipografia e classes de componente (`.card`, `.cv-card`, `.accordion`, `.links a`, etc.).
 
-## Currículo (cv/)
+## Progressive disclosure (accordions)
 
-Existem 4 PDFs, cruzando idioma e variante:
-- `cv/felipi-sousa-cv-pt.pdf` / `cv/felipi-sousa-cv-en.pdf` (versão completa)
-- `cv/felipi-sousa-cv-pt-tech.pdf` / `cv/felipi-sousa-cv-en-tech.pdf` (versão tech, sem monitoria)
+Experiência, Formação, Competências, Projetos Acadêmicos e Liderança mostram só o
+cabeçalho (instituição/cargo/data/local) por padrão — a descrição fica atrás de um
+clique, via `<details class="accordion"><summary class="accordion-toggle">...`. Ao
+adicionar uma entrada nova nessas seções, siga esse padrão em vez de deixar texto
+sempre visível. A seção "Sobre" usa uma variante sem cabeçalho (`.readmore-toggle`,
+ícone `+`/`×`) pra continuar o texto corrido.
 
-Os links de download usam atributos `data-pdf-pt` e `data-pdf-en` no elemento `<a>`, trocados dinamicamente pelo script de idioma. Ao atualizar um PDF, mantenha o nome do arquivo (sobrescreva) ou, se mudar o nome, atualize os dois atributos `data-pdf-*` correspondentes. Os PDFs em si vêm da skill `latex-cv` — depois de gerar/atualizar um `.tex`, compile e substitua o arquivo aqui.
+## Currículo e carta (cv/)
 
-> Atualização de 08/09/2026: o projeto raiz (`~/Projects/career`) foi reorganizado — os fontes `.tex` agora vivem em `02_cv_and_letters/src/` e os PDFs compilados em `02_cv_and_letters/dist/`. Rode `./sync_cvs.sh` na raiz do projeto pra copiar os PDFs de lá pra cá com o nome certo, em vez de copiar à mão. A home hoje também baixa uma versão bilíngue única (`felipi-sousa-cv-bilingual.pdf`, `felipi-sousa-carta-bilingual.pdf`), sem o toggle `data-pdf-pt`/`data-pdf-en` pra esses dois links específicos.
+Só 2 PDFs, ambos bilíngues (inglês e português no mesmo arquivo):
+`cv/felipi-sousa-cv-bilingual.pdf` e `cv/felipi-sousa-carta-bilingual.pdf`. Não há
+mais versões PT/EN separadas nem variante "foco em TI" — foram retiradas de propósito
+em 09/09/2026. Os links desses dois na home não trocam de `href` por idioma (o PDF já
+é bilíngue); não use mais o padrão antigo `data-pdf-pt`/`data-pdf-en`.
+
+Os `.tex` fonte vivem em `02_cv_and_letters/src/` (raiz do projeto, `~/Projects/career`,
+fora deste repo) e os PDFs compilados em `02_cv_and_letters/dist/`, nomeados com a
+data (`cv-bilingual-AAAA-MM-DD.pdf`). Depois de recompilar, rode `./sync_cvs.sh` na
+raiz do projeto — ele acha o PDF datado mais recente sozinho e copia pra cá com o
+nome estável que os links da home esperam. Os PDFs em si vêm da skill `latex-cv`.
 
 ## Checklist antes de considerar pronto
 
 1. Testou localmente com `python3 -m http.server`?
 2. Alternou entre PT e EN e o conteúdo novo aparece nos dois?
-3. Conferiu modo claro e escuro?
-4. Se mexeu na navegação (`.sitenav`) ou em qualquer elemento repetido, aplicou a mudança em todas as páginas relevantes?
-5. Testou o toggle de idioma depois de recarregar a página (`localStorage` deve manter a preferência)?
+3. Conferiu modo claro e escuro, incluindo o toggle manual (não só o automático do sistema)?
+4. Se mexeu na navegação (`.topbar`) ou em qualquer elemento repetido, aplicou a mudança em todas as páginas relevantes?
+5. Testou o toggle de idioma e o de tema depois de recarregar a página (`localStorage` deve manter as duas preferências)?
 
 Apresente o diff antes de gravar mudanças, especialmente em `index.html` — é a página de entrada usada para recrutadores.
 

@@ -8,13 +8,16 @@ Source for [felipiadenildo.github.io](https://felipiadenildo.github.io), my pers
 
 ### Pages
 
-- `index.html` — home
-- `historia.html` — my story
-- `listas.html` — movies, TV series, books and anime I've kept track of
-- `blog.html` — blog
-- `cv/` — CV in English and Portuguese, general and tech-focused versions
+- `index.html` — home, the only page linked from navigation. Full résumé and cover
+  letter content embedded inline (progressive disclosure via `<details>`), light/dark
+  toggle, English/Portuguese toggle.
+- `historia.html`, `blog.html`, `listas.html` — kept live at their own URLs (each
+  `noindex`) but not linked from anywhere; not part of the active site.
+- `cv/` — the two general downloads linked from the home page: bilingual CV and
+  bilingual cover letter (English and Portuguese in the same PDF).
 
-Every page has a language toggle (`data-lang-el` attributes in the HTML, switched by `content/render.js`) so English and Portuguese live in the same markup instead of separate builds.
+Every page has a language toggle (`data-lang-el` attributes in the HTML). `index.html`
+has its own inline toggle script; the older pages share `content/render.js`.
 
 ### Running it locally
 
@@ -32,13 +35,17 @@ Fonte do [felipiadenildo.github.io](https://felipiadenildo.github.io), meu site 
 
 ### Páginas
 
-- `index.html` — início
-- `historia.html` — minha história
-- `listas.html` — filmes, séries, livros e animes que fui registrando
-- `blog.html` — blog
-- `cv/` — currículo em inglês e português, versões gerais e voltadas a tech
+- `index.html` — início, única página presente na navegação. Currículo e carta de
+  apresentação completos embutidos ali (progressive disclosure via `<details>`),
+  alternância de tema claro/escuro e de idioma PT/EN.
+- `historia.html`, `blog.html`, `listas.html` — continuam no ar por URL direta (cada
+  uma com `noindex`), mas sem link em lugar nenhum; não fazem parte do site ativo.
+- `cv/` — os dois downloads gerais linkados na home: CV bilíngue e carta bilíngue
+  (inglês e português no mesmo PDF).
 
-Toda página tem alternância de idioma (atributos `data-lang-el` no HTML, trocados por `content/render.js`), então inglês e português convivem no mesmo markup em vez de builds separados.
+Toda página tem alternância de idioma (atributos `data-lang-el` no HTML). O
+`index.html` tem seu próprio script de alternância; as páginas mais antigas
+compartilham `content/render.js`.
 
 ### Rodando localmente
 
