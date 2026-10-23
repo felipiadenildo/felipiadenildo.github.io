@@ -56,8 +56,8 @@ mais versões PT/EN separadas nem variante "foco em TI" — foram retiradas de p
 em 09/09/2026. Os links desses dois na home não trocam de `href` por idioma (o PDF já
 é bilíngue); não use mais o padrão antigo `data-pdf-pt`/`data-pdf-en`.
 
-Os `.tex` fonte vivem em `02_cv_and_letters/src/` (raiz do projeto, `~/Projects/career`,
-fora deste repo) e os PDFs compilados em `02_cv_and_letters/dist/`, nomeados com a
+Os `.tex` fonte vivem em `cv_and_letters/src/` (raiz do projeto, `~/Projects/career`,
+fora deste repo) e os PDFs compilados em `cv_and_letters/dist/`, nomeados com a
 data (`cv-bilingual-AAAA-MM-DD.pdf`). Depois de recompilar, rode `./sync_cvs.sh` na
 raiz do projeto — ele acha o PDF datado mais recente sozinho e copia pra cá com o
 nome estável que os links da home esperam. Os PDFs em si vêm da skill `latex-cv`.
